@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19ec8b5f000347f0a0b661290f3882ee" Name="Diagram1">
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezArea" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezCliente" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezDepartamento" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezMetodoPago" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezProductos" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezProductoSucursal" Width="1.5" PointX="7.5" PointY="1.5" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezProveedor" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezSucursal" Width="1.5" PointX="5.25" PointY="5.75" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezVenta" Width="1.5" PointX="7.5" PointY="9.625" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.JFernandezVentaProducto" Width="1.5" PointX="9.75" PointY="1.25" />
+        <EntityTypeShape EntityType="JFernandezEcommerceModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezDepartamento_JFernandezArea" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezCliente" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezDepartamento" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezMetodoPago" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezProveedor" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezProductos1" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductos" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezSucursal" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductoSucursal" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezVenta1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

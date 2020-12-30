@@ -1,0 +1,6 @@
+C:\Users\julio\source\repos\CrudD\DL_SQL-client\bin\Debug\DL_SQL-client.dll
+C:\Users\julio\source\repos\CrudD\DL_SQL-client\bin\Debug\DL_SQL-client.pdb
+C:\Users\julio\source\repos\CrudD\DL_SQL-client\obj\Debug\DL_SQL-client.csprojAssemblyReference.cache
+C:\Users\julio\source\repos\CrudD\DL_SQL-client\obj\Debug\DL_SQL-client.csproj.CoreCompileInputs.cache
+C:\Users\julio\source\repos\CrudD\DL_SQL-client\obj\Debug\DL_SQL-client.dll
+C:\Users\julio\source\repos\CrudD\DL_SQL-client\obj\Debug\DL_SQL-client.pdb

@@ -1,0 +1,1191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JFernandezEcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="JFernandezArea">
+          <Key>
+            <PropertyRef Name="IdArea" />
+          </Key>
+          <Property Name="IdArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JFernandezCliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreC" Type="varchar" MaxLength="50" />
+          <Property Name="Rfc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JFernandezDepartamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreD" Type="varchar" MaxLength="50" />
+          <Property Name="IdArea" Type="int" />
+        </EntityType>
+        <EntityType Name="JFernandezMetodoPago">
+          <Key>
+            <PropertyRef Name="IdMetodoPago" />
+          </Key>
+          <Property Name="IdMetodoPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Metodo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JFernandezProductos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IdDepartamento" Type="int" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="JFernandezProductoSucursal">
+          <Key>
+            <PropertyRef Name="IdProductoSucursal" />
+          </Key>
+          <Property Name="IdProductoSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProducto" Type="int" />
+          <Property Name="IdSucursal" Type="int" />
+        </EntityType>
+        <EntityType Name="JFernandezProveedor">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProveedor" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="JFernandezSucursal">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JFernandezVenta">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="Total" Type="float" />
+          <Property Name="IdMetodoPago" Type="int" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="JFernandezVentaProducto">
+          <Key>
+            <PropertyRef Name="IdVentaProducto" />
+          </Key>
+          <Property Name="IdVentaProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVenta" Type="int" />
+          <Property Name="IdProductoSucursal" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="IdProducto" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_JFernandezDepartamento_JFernandezArea">
+          <End Role="JFernandezArea" Type="Self.JFernandezArea" Multiplicity="0..1" />
+          <End Role="JFernandezDepartamento" Type="Self.JFernandezDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezArea">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="JFernandezDepartamento">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductos_JFernandezDepartamento">
+          <End Role="JFernandezDepartamento" Type="Self.JFernandezDepartamento" Multiplicity="0..1" />
+          <End Role="JFernandezProductos" Type="Self.JFernandezProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezDepartamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="JFernandezProductos">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductos_JFernandezProveedor">
+          <End Role="JFernandezProveedor" Type="Self.JFernandezProveedor" Multiplicity="0..1" />
+          <End Role="JFernandezProductos" Type="Self.JFernandezProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProveedor">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="JFernandezProductos">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductoSucursal_JFernandezProductos1">
+          <End Role="JFernandezProductos" Type="Self.JFernandezProductos" Multiplicity="0..1" />
+          <End Role="JFernandezProductoSucursal" Type="Self.JFernandezProductoSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProductos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="JFernandezProductoSucursal">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductoSucursal_JFernandezSucursal">
+          <End Role="JFernandezSucursal" Type="Self.JFernandezSucursal" Multiplicity="0..1" />
+          <End Role="JFernandezProductoSucursal" Type="Self.JFernandezProductoSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezSucursal">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="JFernandezProductoSucursal">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVenta_JFernandezCliente">
+          <End Role="JFernandezCliente" Type="Self.JFernandezCliente" Multiplicity="0..1" />
+          <End Role="JFernandezVenta" Type="Self.JFernandezVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezCliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="JFernandezVenta">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVenta_JFernandezMetodoPago">
+          <End Role="JFernandezMetodoPago" Type="Self.JFernandezMetodoPago" Multiplicity="0..1" />
+          <End Role="JFernandezVenta" Type="Self.JFernandezVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezMetodoPago">
+              <PropertyRef Name="IdMetodoPago" />
+            </Principal>
+            <Dependent Role="JFernandezVenta">
+              <PropertyRef Name="IdMetodoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVentaProducto_JFernandezProductos">
+          <End Role="JFernandezProductos" Type="Self.JFernandezProductos" Multiplicity="0..1" />
+          <End Role="JFernandezVentaProducto" Type="Self.JFernandezVentaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProductos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="JFernandezVentaProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVentaProducto_JFernandezProductoSucursal">
+          <End Role="JFernandezProductoSucursal" Type="Self.JFernandezProductoSucursal" Multiplicity="0..1" />
+          <End Role="JFernandezVentaProducto" Type="Self.JFernandezVentaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProductoSucursal">
+              <PropertyRef Name="IdProductoSucursal" />
+            </Principal>
+            <Dependent Role="JFernandezVentaProducto">
+              <PropertyRef Name="IdProductoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVentaProducto_JFernandezVenta1">
+          <End Role="JFernandezVenta" Type="Self.JFernandezVenta" Multiplicity="0..1" />
+          <End Role="JFernandezVentaProducto" Type="Self.JFernandezVentaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezVenta">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="JFernandezVentaProducto">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreA" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreC" Type="varchar" Mode="In" />
+          <Parameter Name="Rfc" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreD" Type="varchar" Mode="In" />
+          <Parameter Name="IdArea" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddMetodoPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Metodo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+          <Parameter Name="IdProveedor" Type="int" Mode="In" />
+          <Parameter Name="Image" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="AddProductoSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreProveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreS" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdArea" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteMetodoPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMetodoPago" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProductoSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProductoSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetAllArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllDepartamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllMetodoPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllProductoSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetByIdEF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreA" Type="varchar" Mode="In" />
+          <Parameter Name="IdArea" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreC" Type="varchar" Mode="In" />
+          <Parameter Name="Rfc" Type="varchar" Mode="In" />
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreD" Type="varchar" Mode="In" />
+          <Parameter Name="IdArea" Type="int" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateMetodoPago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Metodo" Type="varchar" Mode="In" />
+          <Parameter Name="IdMetodoProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+          <Parameter Name="IdProveedor" Type="int" Mode="In" />
+          <Parameter Name="Image" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateProductoSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdProductoSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreProveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="IdProveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreS" Type="varchar" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="JFernandezEcommerceModelStoreContainer">
+          <EntitySet Name="JFernandezArea" EntityType="Self.JFernandezArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezCliente" EntityType="Self.JFernandezCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezDepartamento" EntityType="Self.JFernandezDepartamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezMetodoPago" EntityType="Self.JFernandezMetodoPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezProductos" EntityType="Self.JFernandezProductos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezProductoSucursal" EntityType="Self.JFernandezProductoSucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezProveedor" EntityType="Self.JFernandezProveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezSucursal" EntityType="Self.JFernandezSucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezVenta" EntityType="Self.JFernandezVenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JFernandezVentaProducto" EntityType="Self.JFernandezVentaProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_JFernandezDepartamento_JFernandezArea" Association="Self.FK_JFernandezDepartamento_JFernandezArea">
+            <End Role="JFernandezArea" EntitySet="JFernandezArea" />
+            <End Role="JFernandezDepartamento" EntitySet="JFernandezDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductos_JFernandezDepartamento" Association="Self.FK_JFernandezProductos_JFernandezDepartamento">
+            <End Role="JFernandezDepartamento" EntitySet="JFernandezDepartamento" />
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductos_JFernandezProveedor" Association="Self.FK_JFernandezProductos_JFernandezProveedor">
+            <End Role="JFernandezProveedor" EntitySet="JFernandezProveedor" />
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezProductos1" Association="Self.FK_JFernandezProductoSucursal_JFernandezProductos1">
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+            <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezSucursal" Association="Self.FK_JFernandezProductoSucursal_JFernandezSucursal">
+            <End Role="JFernandezSucursal" EntitySet="JFernandezSucursal" />
+            <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVenta_JFernandezCliente" Association="Self.FK_JFernandezVenta_JFernandezCliente">
+            <End Role="JFernandezCliente" EntitySet="JFernandezCliente" />
+            <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVenta_JFernandezMetodoPago" Association="Self.FK_JFernandezVenta_JFernandezMetodoPago">
+            <End Role="JFernandezMetodoPago" EntitySet="JFernandezMetodoPago" />
+            <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezProductos" Association="Self.FK_JFernandezVentaProducto_JFernandezProductos">
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+            <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezProductoSucursal" Association="Self.FK_JFernandezVentaProducto_JFernandezProductoSucursal">
+            <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+            <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezVenta1" Association="Self.FK_JFernandezVentaProducto_JFernandezVenta1">
+            <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
+            <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JFernandezEcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="JFernandezEcommerceEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GetAllDepartamento" ReturnType="Collection(JFernandezEcommerceModel.GetAllDepartamento_Result)" />
+          <FunctionImport Name="AddDepartamento">
+            <Parameter Name="NombreD" Mode="In" Type="String" />
+            <Parameter Name="IdArea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteDepartamento">
+          <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetByIdEF" ReturnType="Collection(JFernandezEcommerceModel.GetByIdEF_Result)">
+          <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateDepartamento">
+            <Parameter Name="NombreD" Mode="In" Type="String" />
+            <Parameter Name="IdArea" Mode="In" Type="Int32" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddArea">
+          <Parameter Name="NombreA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddProducto">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Image" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="AddProductoSucursal">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddProveedor">
+            <Parameter Name="NombreProveedor" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddSucursal">
+          <Parameter Name="NombreS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteArea">
+          <Parameter Name="IdArea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteProducto">
+          <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteProductoSucursal">
+          <Parameter Name="IdProductoSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteProveedor">
+          <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSucursal">
+          <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllArea" ReturnType="Collection(JFernandezEcommerceModel.GetAllArea_Result)" />
+          <FunctionImport Name="GetAllProducto" ReturnType="Collection(JFernandezEcommerceModel.GetAllProducto_Result)" />
+          <FunctionImport Name="GetAllProductoSucursal" ReturnType="Collection(JFernandezEcommerceModel.GetAllProductoSucursal_Result)" />
+          <FunctionImport Name="GetAllProveedor" ReturnType="Collection(JFernandezEcommerceModel.GetAllProveedor_Result)" />
+          <FunctionImport Name="GetAllSucursal" ReturnType="Collection(JFernandezEcommerceModel.GetAllSucursal_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(JFernandezEcommerceModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(JFernandezEcommerceModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateArea">
+            <Parameter Name="NombreA" Mode="In" Type="String" />
+            <Parameter Name="IdArea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProducto">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Image" Mode="In" Type="Binary" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProductoSucursal">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdProductoSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProveedor">
+            <Parameter Name="NombreProveedor" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSucursal">
+            <Parameter Name="NombreS" Mode="In" Type="String" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="JFernandezArea" EntityType="JFernandezEcommerceModel.JFernandezArea" />
+          <EntitySet Name="JFernandezCliente" EntityType="JFernandezEcommerceModel.JFernandezCliente" />
+          <EntitySet Name="JFernandezDepartamento" EntityType="JFernandezEcommerceModel.JFernandezDepartamento" />
+          <EntitySet Name="JFernandezMetodoPago" EntityType="JFernandezEcommerceModel.JFernandezMetodoPago" />
+          <EntitySet Name="JFernandezProductos" EntityType="JFernandezEcommerceModel.JFernandezProductos" />
+          <EntitySet Name="JFernandezProductoSucursal" EntityType="JFernandezEcommerceModel.JFernandezProductoSucursal" />
+          <EntitySet Name="JFernandezProveedor" EntityType="JFernandezEcommerceModel.JFernandezProveedor" />
+          <EntitySet Name="JFernandezSucursal" EntityType="JFernandezEcommerceModel.JFernandezSucursal" />
+          <EntitySet Name="JFernandezVenta" EntityType="JFernandezEcommerceModel.JFernandezVenta" />
+          <EntitySet Name="JFernandezVentaProducto" EntityType="JFernandezEcommerceModel.JFernandezVentaProducto" />
+          <EntitySet Name="sysdiagrams" EntityType="JFernandezEcommerceModel.sysdiagrams" />
+          <AssociationSet Name="FK_JFernandezDepartamento_JFernandezArea" Association="JFernandezEcommerceModel.FK_JFernandezDepartamento_JFernandezArea">
+            <End Role="JFernandezArea" EntitySet="JFernandezArea" />
+            <End Role="JFernandezDepartamento" EntitySet="JFernandezDepartamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVenta_JFernandezCliente" Association="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezCliente">
+            <End Role="JFernandezCliente" EntitySet="JFernandezCliente" />
+            <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductos_JFernandezDepartamento" Association="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezDepartamento">
+            <End Role="JFernandezDepartamento" EntitySet="JFernandezDepartamento" />
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVenta_JFernandezMetodoPago" Association="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezMetodoPago">
+            <End Role="JFernandezMetodoPago" EntitySet="JFernandezMetodoPago" />
+            <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductos_JFernandezProveedor" Association="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezProveedor">
+            <End Role="JFernandezProveedor" EntitySet="JFernandezProveedor" />
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezProductos1" Association="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezProductos1">
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+            <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezProductos" Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductos">
+            <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+            <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezSucursal" Association="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezSucursal">
+            <End Role="JFernandezSucursal" EntitySet="JFernandezSucursal" />
+            <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezProductoSucursal" Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductoSucursal">
+            <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+            <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezVenta1" Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezVenta1">
+            <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
+            <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllDepartamento1" ReturnType="Collection(JFernandezEcommerceModel.GetAllDepartamento1_Result)" />
+          <FunctionImport Name="AddCliente">
+            <Parameter Name="NombreC" Mode="In" Type="String" />
+            <Parameter Name="Rfc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddMetodoPago">
+            <Parameter Name="Metodo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCliente">
+            <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMetodoPago">
+            <Parameter Name="IdMetodoPago" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllCliente" ReturnType="Collection(JFernandezEcommerceModel.GetAllCliente_Result)" />
+          <FunctionImport Name="GetAllDepartamentos" ReturnType="Collection(JFernandezEcommerceModel.GetAllDepartamentos_Result)" />
+          <FunctionImport Name="GetAllMetodoPago" ReturnType="Collection(JFernandezEcommerceModel.GetAllMetodoPago_Result)" />
+          <FunctionImport Name="UpdateCliente">
+            <Parameter Name="NombreC" Mode="In" Type="String" />
+            <Parameter Name="Rfc" Mode="In" Type="String" />
+            <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMetodoPago">
+            <Parameter Name="Metodo" Mode="In" Type="String" />
+            <Parameter Name="IdMetodoProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="GetAllDepartamento_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="NombreD" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetByIdEF_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="NombreD" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllArea_Result">
+          <Property Type="Int32" Name="IdArea" Nullable="false" />
+          <Property Type="String" Name="NombreA" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllProducto_Result">
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+          <Property Type="Int32" Name="IdProveedor" Nullable="true" />
+          <Property Type="Binary" Name="Image" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllProductoSucursal_Result">
+          <Property Type="Int32" Name="IdProductoSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdProducto" Nullable="true" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllProveedor_Result">
+          <Property Type="Int32" Name="IdProveedor" Nullable="false" />
+          <Property Type="String" Name="NombreProveedor" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetAllSucursal_Result">
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="String" Name="NombreS" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="JFernandezArea">
+          <Key>
+            <PropertyRef Name="IdArea" />
+          </Key>
+          <Property Name="IdArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JFernandezDepartamento" Relationship="JFernandezEcommerceModel.FK_JFernandezDepartamento_JFernandezArea" FromRole="JFernandezArea" ToRole="JFernandezDepartamento" />
+        </EntityType>
+        <EntityType Name="JFernandezCliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rfc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JFernandezVenta" Relationship="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezCliente" FromRole="JFernandezCliente" ToRole="JFernandezVenta" />
+        </EntityType>
+        <EntityType Name="JFernandezDepartamento">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdArea" Type="Int32" />
+          <NavigationProperty Name="JFernandezArea" Relationship="JFernandezEcommerceModel.FK_JFernandezDepartamento_JFernandezArea" FromRole="JFernandezDepartamento" ToRole="JFernandezArea" />
+          <NavigationProperty Name="JFernandezProductos" Relationship="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezDepartamento" FromRole="JFernandezDepartamento" ToRole="JFernandezProductos" />
+        </EntityType>
+        <EntityType Name="JFernandezMetodoPago">
+          <Key>
+            <PropertyRef Name="IdMetodoPago" />
+          </Key>
+          <Property Name="IdMetodoPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JFernandezVenta" Relationship="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezMetodoPago" FromRole="JFernandezMetodoPago" ToRole="JFernandezVenta" />
+        </EntityType>
+        <EntityType Name="JFernandezProductos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdDepartamento" Type="Int32" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="JFernandezDepartamento" Relationship="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezDepartamento" FromRole="JFernandezProductos" ToRole="JFernandezDepartamento" />
+          <NavigationProperty Name="JFernandezProveedor" Relationship="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezProveedor" FromRole="JFernandezProductos" ToRole="JFernandezProveedor" />
+          <NavigationProperty Name="JFernandezProductoSucursal" Relationship="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezProductos1" FromRole="JFernandezProductos" ToRole="JFernandezProductoSucursal" />
+          <NavigationProperty Name="JFernandezVentaProducto" Relationship="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductos" FromRole="JFernandezProductos" ToRole="JFernandezVentaProducto" />
+        </EntityType>
+        <EntityType Name="JFernandezProductoSucursal">
+          <Key>
+            <PropertyRef Name="IdProductoSucursal" />
+          </Key>
+          <Property Name="IdProductoSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProducto" Type="Int32" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <NavigationProperty Name="JFernandezProductos" Relationship="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezProductos1" FromRole="JFernandezProductoSucursal" ToRole="JFernandezProductos" />
+          <NavigationProperty Name="JFernandezSucursal" Relationship="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezSucursal" FromRole="JFernandezProductoSucursal" ToRole="JFernandezSucursal" />
+          <NavigationProperty Name="JFernandezVentaProducto" Relationship="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductoSucursal" FromRole="JFernandezProductoSucursal" ToRole="JFernandezVentaProducto" />
+        </EntityType>
+        <EntityType Name="JFernandezProveedor">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JFernandezProductos" Relationship="JFernandezEcommerceModel.FK_JFernandezProductos_JFernandezProveedor" FromRole="JFernandezProveedor" ToRole="JFernandezProductos" />
+        </EntityType>
+        <EntityType Name="JFernandezSucursal">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JFernandezProductoSucursal" Relationship="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezSucursal" FromRole="JFernandezSucursal" ToRole="JFernandezProductoSucursal" />
+        </EntityType>
+        <EntityType Name="JFernandezVenta">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="IdMetodoPago" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="JFernandezCliente" Relationship="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezCliente" FromRole="JFernandezVenta" ToRole="JFernandezCliente" />
+          <NavigationProperty Name="JFernandezMetodoPago" Relationship="JFernandezEcommerceModel.FK_JFernandezVenta_JFernandezMetodoPago" FromRole="JFernandezVenta" ToRole="JFernandezMetodoPago" />
+          <NavigationProperty Name="JFernandezVentaProducto" Relationship="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezVenta1" FromRole="JFernandezVenta" ToRole="JFernandezVentaProducto" />
+        </EntityType>
+        <EntityType Name="JFernandezVentaProducto">
+          <Key>
+            <PropertyRef Name="IdVentaProducto" />
+          </Key>
+          <Property Name="IdVentaProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVenta" Type="Int32" />
+          <Property Name="IdProductoSucursal" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="IdProducto" Type="Int32" />
+          <NavigationProperty Name="JFernandezProductos" Relationship="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductos" FromRole="JFernandezVentaProducto" ToRole="JFernandezProductos" />
+          <NavigationProperty Name="JFernandezProductoSucursal" Relationship="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductoSucursal" FromRole="JFernandezVentaProducto" ToRole="JFernandezProductoSucursal" />
+          <NavigationProperty Name="JFernandezVenta" Relationship="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezVenta1" FromRole="JFernandezVentaProducto" ToRole="JFernandezVenta" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_JFernandezDepartamento_JFernandezArea">
+          <End Type="JFernandezEcommerceModel.JFernandezArea" Role="JFernandezArea" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezDepartamento" Role="JFernandezDepartamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezArea">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="JFernandezDepartamento">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVenta_JFernandezCliente">
+          <End Type="JFernandezEcommerceModel.JFernandezCliente" Role="JFernandezCliente" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezVenta" Role="JFernandezVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezCliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="JFernandezVenta">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductos_JFernandezDepartamento">
+          <End Type="JFernandezEcommerceModel.JFernandezDepartamento" Role="JFernandezDepartamento" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezProductos" Role="JFernandezProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezDepartamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="JFernandezProductos">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVenta_JFernandezMetodoPago">
+          <End Type="JFernandezEcommerceModel.JFernandezMetodoPago" Role="JFernandezMetodoPago" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezVenta" Role="JFernandezVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezMetodoPago">
+              <PropertyRef Name="IdMetodoPago" />
+            </Principal>
+            <Dependent Role="JFernandezVenta">
+              <PropertyRef Name="IdMetodoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductos_JFernandezProveedor">
+          <End Type="JFernandezEcommerceModel.JFernandezProveedor" Role="JFernandezProveedor" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezProductos" Role="JFernandezProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProveedor">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="JFernandezProductos">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductoSucursal_JFernandezProductos1">
+          <End Type="JFernandezEcommerceModel.JFernandezProductos" Role="JFernandezProductos" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezProductoSucursal" Role="JFernandezProductoSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProductos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="JFernandezProductoSucursal">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVentaProducto_JFernandezProductos">
+          <End Type="JFernandezEcommerceModel.JFernandezProductos" Role="JFernandezProductos" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezVentaProducto" Role="JFernandezVentaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProductos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="JFernandezVentaProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezProductoSucursal_JFernandezSucursal">
+          <End Type="JFernandezEcommerceModel.JFernandezSucursal" Role="JFernandezSucursal" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezProductoSucursal" Role="JFernandezProductoSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezSucursal">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="JFernandezProductoSucursal">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVentaProducto_JFernandezProductoSucursal">
+          <End Type="JFernandezEcommerceModel.JFernandezProductoSucursal" Role="JFernandezProductoSucursal" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezVentaProducto" Role="JFernandezVentaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezProductoSucursal">
+              <PropertyRef Name="IdProductoSucursal" />
+            </Principal>
+            <Dependent Role="JFernandezVentaProducto">
+              <PropertyRef Name="IdProductoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JFernandezVentaProducto_JFernandezVenta1">
+          <End Type="JFernandezEcommerceModel.JFernandezVenta" Role="JFernandezVenta" Multiplicity="0..1" />
+          <End Type="JFernandezEcommerceModel.JFernandezVentaProducto" Role="JFernandezVentaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JFernandezVenta">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="JFernandezVentaProducto">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAllDepartamento1_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="NombreD" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreA" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllCliente_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="NombreC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Rfc" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllDepartamentos_Result">
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="String" Name="NombreD" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllMetodoPago_Result">
+          <Property Type="Int32" Name="IdMetodoPago" Nullable="false" />
+          <Property Type="String" Name="Metodo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JFernandezEcommerceModelStoreContainer" CdmEntityContainer="JFernandezEcommerceEntities">
+          <FunctionImportMapping FunctionImportName="AddDepartamento" FunctionName="JFernandezEcommerceModel.Store.AddDepartamento" />
+          <FunctionImportMapping FunctionImportName="DeleteDepartamento" FunctionName="JFernandezEcommerceModel.Store.DeleteDepartamento" />
+          <FunctionImportMapping FunctionImportName="GetByIdEF" FunctionName="JFernandezEcommerceModel.Store.GetByIdEF">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetByIdEF_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="NombreD" ColumnName="NombreD" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateDepartamento" FunctionName="JFernandezEcommerceModel.Store.UpdateDepartamento" />
+          <FunctionImportMapping FunctionImportName="AddArea" FunctionName="JFernandezEcommerceModel.Store.AddArea" />
+          <FunctionImportMapping FunctionImportName="AddProducto" FunctionName="JFernandezEcommerceModel.Store.AddProducto" />
+          <FunctionImportMapping FunctionImportName="AddProductoSucursal" FunctionName="JFernandezEcommerceModel.Store.AddProductoSucursal" />
+          <FunctionImportMapping FunctionImportName="AddProveedor" FunctionName="JFernandezEcommerceModel.Store.AddProveedor" />
+          <FunctionImportMapping FunctionImportName="AddSucursal" FunctionName="JFernandezEcommerceModel.Store.AddSucursal" />
+          <FunctionImportMapping FunctionImportName="DeleteArea" FunctionName="JFernandezEcommerceModel.Store.DeleteArea" />
+          <FunctionImportMapping FunctionImportName="DeleteProducto" FunctionName="JFernandezEcommerceModel.Store.DeleteProducto" />
+          <FunctionImportMapping FunctionImportName="DeleteProductoSucursal" FunctionName="JFernandezEcommerceModel.Store.DeleteProductoSucursal" />
+          <FunctionImportMapping FunctionImportName="DeleteProveedor" FunctionName="JFernandezEcommerceModel.Store.DeleteProveedor" />
+          <FunctionImportMapping FunctionImportName="DeleteSucursal" FunctionName="JFernandezEcommerceModel.Store.DeleteSucursal" />
+          <FunctionImportMapping FunctionImportName="GetAllArea" FunctionName="JFernandezEcommerceModel.Store.GetAllArea">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllArea_Result">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="NombreA" ColumnName="NombreA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllProducto" FunctionName="JFernandezEcommerceModel.Store.GetAllProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllProducto_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllProductoSucursal" FunctionName="JFernandezEcommerceModel.Store.GetAllProductoSucursal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllProductoSucursal_Result">
+                <ScalarProperty Name="IdProductoSucursal" ColumnName="IdProductoSucursal" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllProveedor" FunctionName="JFernandezEcommerceModel.Store.GetAllProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllProveedor_Result">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSucursal" FunctionName="JFernandezEcommerceModel.Store.GetAllSucursal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllSucursal_Result">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="NombreS" ColumnName="NombreS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="JFernandezEcommerceModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="JFernandezEcommerceModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="JFernandezEcommerceModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="JFernandezEcommerceModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="JFernandezEcommerceModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="JFernandezEcommerceModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="JFernandezEcommerceModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateArea" FunctionName="JFernandezEcommerceModel.Store.UpdateArea" />
+          <FunctionImportMapping FunctionImportName="UpdateProducto" FunctionName="JFernandezEcommerceModel.Store.UpdateProducto" />
+          <FunctionImportMapping FunctionImportName="UpdateProductoSucursal" FunctionName="JFernandezEcommerceModel.Store.UpdateProductoSucursal" />
+          <FunctionImportMapping FunctionImportName="UpdateProveedor" FunctionName="JFernandezEcommerceModel.Store.UpdateProveedor" />
+          <FunctionImportMapping FunctionImportName="UpdateSucursal" FunctionName="JFernandezEcommerceModel.Store.UpdateSucursal" />
+          <EntitySetMapping Name="JFernandezArea">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezArea">
+              <MappingFragment StoreEntitySet="JFernandezArea">
+                <ScalarProperty Name="NombreA" ColumnName="NombreA" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezCliente">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezCliente">
+              <MappingFragment StoreEntitySet="JFernandezCliente">
+                <ScalarProperty Name="Rfc" ColumnName="Rfc" />
+                <ScalarProperty Name="NombreC" ColumnName="NombreC" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezDepartamento">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezDepartamento">
+              <MappingFragment StoreEntitySet="JFernandezDepartamento">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="NombreD" ColumnName="NombreD" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezMetodoPago">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezMetodoPago">
+              <MappingFragment StoreEntitySet="JFernandezMetodoPago">
+                <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezProductos">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezProductos">
+              <MappingFragment StoreEntitySet="JFernandezProductos">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezProductoSucursal">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezProductoSucursal">
+              <MappingFragment StoreEntitySet="JFernandezProductoSucursal">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdProductoSucursal" ColumnName="IdProductoSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezProveedor">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezProveedor">
+              <MappingFragment StoreEntitySet="JFernandezProveedor">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezSucursal">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezSucursal">
+              <MappingFragment StoreEntitySet="JFernandezSucursal">
+                <ScalarProperty Name="NombreS" ColumnName="NombreS" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezVenta">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezVenta">
+              <MappingFragment StoreEntitySet="JFernandezVenta">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JFernandezVentaProducto">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.JFernandezVentaProducto">
+              <MappingFragment StoreEntitySet="JFernandezVentaProducto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdProductoSucursal" ColumnName="IdProductoSucursal" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdVentaProducto" ColumnName="IdVentaProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="JFernandezEcommerceModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllDepartamento1" FunctionName="JFernandezEcommerceModel.Store.GetAllDepartamento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllDepartamento1_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="NombreD" ColumnName="NombreD" />
+                <ScalarProperty Name="NombreA" ColumnName="NombreA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddCliente" FunctionName="JFernandezEcommerceModel.Store.AddCliente" />
+          <FunctionImportMapping FunctionImportName="AddMetodoPago" FunctionName="JFernandezEcommerceModel.Store.AddMetodoPago" />
+          <FunctionImportMapping FunctionImportName="DeleteCliente" FunctionName="JFernandezEcommerceModel.Store.DeleteCliente" />
+          <FunctionImportMapping FunctionImportName="DeleteMetodoPago" FunctionName="JFernandezEcommerceModel.Store.DeleteMetodoPago" />
+          <FunctionImportMapping FunctionImportName="GetAllCliente" FunctionName="JFernandezEcommerceModel.Store.GetAllCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllCliente_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NombreC" ColumnName="NombreC" />
+                <ScalarProperty Name="Rfc" ColumnName="Rfc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllDepartamentos" FunctionName="JFernandezEcommerceModel.Store.GetAllDepartamentos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllDepartamentos_Result">
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="NombreD" ColumnName="NombreD" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllMetodoPago" FunctionName="JFernandezEcommerceModel.Store.GetAllMetodoPago">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllMetodoPago_Result">
+                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+                <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCliente" FunctionName="JFernandezEcommerceModel.Store.UpdateCliente" />
+          <FunctionImportMapping FunctionImportName="UpdateMetodoPago" FunctionName="JFernandezEcommerceModel.Store.UpdateMetodoPago" />
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

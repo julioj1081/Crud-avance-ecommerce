@@ -1,0 +1,38 @@
+﻿@model ML.Departamento
+@{
+    ViewBag.Title = "GetAllDepartamento";
+}
+
+<h2>GetAllDepartamento</h2>
+
+<div class="container">
+    <div class="row">
+        <div style="float:right; margin-bottom:1rem;">
+            @Html.ActionLink("Agregar nuevo departamento", "Add", "Departamento", htmlAttributes: new { @class="btn btn-success"})
+        </div>
+
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <td>Modificar</td>
+                    <td>Id Departamento</td>
+                    <td>Nombre</td>
+                    <td>Area</td>
+                    <td>Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(ML.Departamento depa in Model.Departamentos)
+                {
+                <tr>
+                    <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Update", "Departamento", new { Id = depa.IdDepartamento })"></a></td>
+                    <td>@depa.IdDepartamento</td>
+                    <td>@depa.NombreD</td>
+                    <td>@depa.IdArea</td>
+                    <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Departamento", new { IdDepartamento = depa.IdDepartamento})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');" ;></a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
