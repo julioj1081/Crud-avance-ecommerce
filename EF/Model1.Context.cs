@@ -520,5 +520,93 @@ namespace EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMetodoPago", metodoParameter, idMetodoProductoParameter);
         }
+    
+        public virtual int AddVenta(Nullable<int> idCliente, Nullable<double> total, Nullable<int> idMetodoPago, Nullable<System.DateTime> fecha)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var totalParameter = total.HasValue ?
+                new ObjectParameter("Total", total) :
+                new ObjectParameter("Total", typeof(double));
+    
+            var idMetodoPagoParameter = idMetodoPago.HasValue ?
+                new ObjectParameter("IdMetodoPago", idMetodoPago) :
+                new ObjectParameter("IdMetodoPago", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddVenta", idClienteParameter, totalParameter, idMetodoPagoParameter, fechaParameter);
+        }
+    
+        public virtual int AddVentaProducto(Nullable<int> idVenta, Nullable<int> idProductoSucursal, Nullable<int> cantidad, Nullable<int> idProducto)
+        {
+            var idVentaParameter = idVenta.HasValue ?
+                new ObjectParameter("IdVenta", idVenta) :
+                new ObjectParameter("IdVenta", typeof(int));
+    
+            var idProductoSucursalParameter = idProductoSucursal.HasValue ?
+                new ObjectParameter("IdProductoSucursal", idProductoSucursal) :
+                new ObjectParameter("IdProductoSucursal", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(int));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddVentaProducto", idVentaParameter, idProductoSucursalParameter, cantidadParameter, idProductoParameter);
+        }
+    
+        public virtual ObjectResult<GetAllVenta_Result> GetAllVenta()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllVenta_Result>("GetAllVenta");
+        }
+    
+        public virtual ObjectResult<GetByIdEF_Departamento_Result> GetByIdEF_Departamento(Nullable<int> idDepartamento)
+        {
+            var idDepartamentoParameter = idDepartamento.HasValue ?
+                new ObjectParameter("IdDepartamento", idDepartamento) :
+                new ObjectParameter("IdDepartamento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByIdEF_Departamento_Result>("GetByIdEF_Departamento", idDepartamentoParameter);
+        }
+    
+        public virtual ObjectResult<GetByIdEF_Cliente_Result> GetByIdEF_Cliente(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByIdEF_Cliente_Result>("GetByIdEF_Cliente", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<GetByIdEF_Producto_Result> GetByIdEF_Producto(Nullable<int> idProducto)
+        {
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByIdEF_Producto_Result>("GetByIdEF_Producto", idProductoParameter);
+        }
+    
+        public virtual int DeleteVenta(Nullable<int> idVenta)
+        {
+            var idVentaParameter = idVenta.HasValue ?
+                new ObjectParameter("IdVenta", idVenta) :
+                new ObjectParameter("IdVenta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteVenta", idVentaParameter);
+        }
+    
+        public virtual ObjectResult<GetAllVentaProducto_Result> GetAllVentaProducto()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllVentaProducto_Result>("GetAllVentaProducto");
+        }
     }
 }

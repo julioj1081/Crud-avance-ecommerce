@@ -28,5 +28,7 @@ namespace EF
         public virtual JFernandezSucursal JFernandezSucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JFernandezVentaProducto> JFernandezVentaProducto { get; set; }
+        public virtual JFernandezProductoSucursal JFernandezProductoSucursal1 { get; set; }
+        public virtual JFernandezProductoSucursal JFernandezProductoSucursal2 { get; set; }
     }
 }

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+@model ML.Venta
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Venta nueva</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using(Html.BeginForm("Registro", "Venta", FormMethod.Post))
+            {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label>Id cliente</label>
+                        @Html.TextBoxFor(model => model.IdCliente, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdCliente)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Total)
+                        @Html.TextBoxFor(model => model.Total, new { @class = "form-control", @type = "decimal" })
+                        @Html.ValidationMessageFor(model => model.Total)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdMetodoPago)
+                        @Html.TextBoxFor(model => model.IdMetodoPago, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdMetodoPago)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Fecha)
+                        @Html.EditorFor(model => model.Fecha, new { htmlAttribute = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Fecha)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input type="submit" value="Realizar Venta" class="btn btn-primary" />
+                        @Html.ActionLink("Regresar", "GetAllVenta", "Venta", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

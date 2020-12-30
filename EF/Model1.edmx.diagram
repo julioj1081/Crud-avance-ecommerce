@@ -26,6 +26,7 @@
         <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezSucursal" />
         <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezProductoSucursal" />
         <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezVentaProducto_JFernandezVenta1" />
+        <AssociationConnector Association="JFernandezEcommerceModel.FK_JFernandezProductoSucursal_JFernandezProductoSucursal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

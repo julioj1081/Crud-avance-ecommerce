@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using EF;
+using ML;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -170,6 +172,161 @@ namespace BL
             {
                 result.Correct = false;
                 result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+
+
+        //Con ENTITY
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var p = context.JFernandezProductos.ToList();
+                    result.Objects = new List<object>();
+                    if (p != null)
+                    {
+                        foreach (var item in p)
+                        {
+                            ML.Producto product = new ML.Producto();
+                            product.IdProducto = item.IdProducto;
+                            product.Nombre = item.Nombre;
+                            product.Descripcion = item.Descripcion;
+                            product.Precio = (int)item.Precio;
+                            product.Departamento = item.JFernandezDepartamento.NombreD;
+                            product.Proveedor = item.JFernandezProveedor.NombreProveedor;
+                            product.Image = "No disponible";
+                            result.Objects.Add(product);
+                        }
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static ML.Result AddEF(ML.Producto producto)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.AddProducto(producto.Nombre, producto.Descripcion, (decimal) producto.Precio, (int)producto.IdDepartamento, (int)producto.IdProveedor, Convert.FromBase64String(producto.Image));
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static ML.Result DeleteEF(ML.Producto producto)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.DeleteProducto(producto.IdProducto);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static Result GetByIdEF(int IdProducto)
+        {
+            Result resultado = new Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new EF.JFernandezEcommerceEntities())
+                {
+                    var result = (from a in context.GetByIdEF_Producto(IdProducto) select a).FirstOrDefault();
+
+                    if (result != null)
+                    {
+                        ML.Producto product = new ML.Producto();
+                        product.IdProducto = result.IdProducto;
+                        product.Nombre = result.Nombre;
+                        product.Descripcion = result.Descripcion;
+                        product.Precio = (decimal)result.Precio;
+                        product.IdDepartamento = (int)result.IdDepartamento;
+                        product.IdProveedor = (int)result.IdProveedor;
+                        //falta la imagen
+                        resultado.Object = product;
+                    }
+                    resultado.Correct = true;
+                }
+            }
+            catch (Exception e)
+            {
+                resultado.Correct = false;
+                resultado.ErrorMessage = "Error desconocido" + e;
+            }
+            return resultado;
+        }
+
+        public static ML.Result UpdateEF(ML.Producto producto)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.UpdateProducto(producto.Nombre, producto.Descripcion, (decimal)producto.Precio, (int)producto.IdDepartamento, (int)producto.IdProveedor, Convert.FromBase64String(producto.Image), (int)producto.IdProducto);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Error desconocido";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e.Message;
+
             }
             return result;
         }

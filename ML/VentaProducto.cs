@@ -16,5 +16,7 @@ namespace ML
         public int Cantidad { get; set; }
         public int IdProducto { get; set; }
         public string Producto { get; set; }
+
+        public List<object> VentaProductos { get; set; }
     }
 }

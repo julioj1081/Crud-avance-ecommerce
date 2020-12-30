@@ -30,6 +30,22 @@ namespace PL_Consola
                 Console.WriteLine(result.ErrorMessage);
             }
         }
+        public static void GetAll()
+        {
+            ML.Result result = BL.VentaProducto.GetAllVentaProducto();
+            if (result.Correct)
+            {
+                foreach (ML.VentaProducto VentaProducto in result.Objects)
+                {
+                    Console.WriteLine("IdVentaProducto: " + VentaProducto.IdVentaProducto + " IdVenta:" + VentaProducto.Venta + " IdProductoSucursal: " + VentaProducto.ProductoSucursal + " Cantidad: " + VentaProducto.Cantidad + " Id Producto: " + VentaProducto.Producto);
+                }
+            }
+            else
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrio un error";
+            }
+        }
 
     }
 }

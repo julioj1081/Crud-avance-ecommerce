@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+@model ML.VentaProducto
+<h2>Add venta producto</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using(Html.BeginForm("Registro", "VentaProducto", FormMethod.Post))
+            {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdVenta)
+                        @Html.TextBoxFor(model => model.IdVenta, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdVenta)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdProductoSucursal)
+                        @Html.TextBoxFor(model => model.IdProductoSucursal, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdProductoSucursal)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Cantidad)
+                        @Html.TextBoxFor(model => model.Cantidad, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Cantidad)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdProducto)
+                        @Html.TextBoxFor(model => model.IdProducto, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdProducto)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input type="submit" value="Agregar VentaProducto" class="btn btn-primary" />
+                        @Html.ActionLink("Regresar", "GetAllVentaProducto", "VentaProducto", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

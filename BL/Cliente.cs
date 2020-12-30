@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using EF;
+using ML;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -12,6 +14,8 @@ namespace BL
 {
     public class Cliente
     {
+
+        //Consola
         public static ML.Result AddCliente(ML.Cliente cliente)
         {
             ML.Result result = new ML.Result();
@@ -156,6 +160,154 @@ namespace BL
             }
             return result;
         }
+
+
+
+        //Con ENTITY
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var p = context.JFernandezCliente.ToList();
+                    result.Objects = new List<object>();
+                    if (p != null)
+                    {
+                        foreach (var item in p)
+                        {
+                            ML.Cliente client = new ML.Cliente();
+                            client.IdCliente= item.IdCliente;
+                            client.NombreC = item.NombreC;
+                            client.Rfc = item.Rfc;
+                            result.Objects.Add(client);
+                        }
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static ML.Result AddEF(ML.Cliente cliente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.AddCliente(cliente.NombreC, cliente.Rfc);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static ML.Result DeleteEF(ML.Cliente cliente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.DeleteCliente(cliente.IdCliente);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static Result GetByIdEF(int IdCliente)
+        {
+            Result resultado = new Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new EF.JFernandezEcommerceEntities())
+                {
+                    var result = (from a in context.GetByIdEF_Cliente(IdCliente) select a).FirstOrDefault();
+
+                    if (result != null)
+                    {
+                        ML.Cliente client = new ML.Cliente();
+                        client.IdCliente = result.IdCliente;
+                        client.NombreC = result.NombreC;
+                        client.Rfc = result.Rfc;
+                        resultado.Object = client;
+                    }
+                    resultado.Correct = true;
+                }
+            }
+            catch (Exception e)
+            {
+                resultado.Correct = false;
+                resultado.ErrorMessage = "Error desconocido" + e;
+            }
+            return resultado;
+        }
+
+        public static ML.Result UpdateEF(ML.Cliente cliente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.UpdateCliente(cliente.NombreC, cliente.Rfc, cliente.IdCliente);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Error desconocido";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e.Message;
+
+            }
+            return result;
+        }
+
 
     }
 }

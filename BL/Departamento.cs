@@ -194,7 +194,8 @@ namespace BL
                             ML.Departamento depa = new ML.Departamento();
                             depa.IdDepartamento = item.IdDepartamento;
                             depa.NombreD = item.NombreD;
-                            depa.IdArea = (int)item.IdArea;
+                            //depa.IdArea = (int)item.IdArea;
+                            depa.Are = item.JFernandezArea.NombreA;
                             result.Objects.Add(depa);
                         }
                         result.Correct = true;
@@ -269,7 +270,7 @@ namespace BL
             {
                 using(EF.JFernandezEcommerceEntities context = new EF.JFernandezEcommerceEntities())
                 {
-                    var result = (from a in context.GetByIdEF(IdDepartamento) select a).FirstOrDefault();
+                    var result = (from a in context.GetByIdEF_Departamento(IdDepartamento) select a).FirstOrDefault();
 
                     if (result != null)
                     {

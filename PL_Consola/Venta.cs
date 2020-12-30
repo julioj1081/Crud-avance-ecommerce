@@ -61,7 +61,7 @@ namespace PL_Consola
             {
                 foreach (ML.Venta venta in result.Objects)
                 {
-                    Console.WriteLine("IdArea: " + venta.IdVenta + " Cliente:" + venta.Cliente + " Total: "+ venta.Total + " Metodo pago: "+ venta.MetodoPago + " "+ venta.Fecha);
+                    Console.WriteLine("IdVenta: " + venta.IdVenta + " Cliente:" + venta.Cliente + " Total: "+ venta.Total + " Metodo pago: "+ venta.MetodoPago + " "+ venta.Fecha);
                 }
             }
             else

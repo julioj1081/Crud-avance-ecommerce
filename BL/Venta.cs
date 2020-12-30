@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ML;
+using EF;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -11,6 +13,7 @@ namespace BL
 {
     public class Venta
     {
+        //Con SP
         public static ML.Result AddVenta(ML.Venta venta)
         {
             ML.Result result = new ML.Result();
@@ -112,6 +115,98 @@ namespace BL
                             result.Correct = false;
                             result.ErrorMessage = "upps";
                         }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+
+        //Con ENTITY
+        public static ML.Result GetAllEF()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var p = context.JFernandezVenta.ToList();
+                    result.Objects = new List<object>();
+                    if (p != null)
+                    {
+                        foreach (var item in p)
+                        {
+                            ML.Venta venta = new ML.Venta();
+                            venta.IdVenta = item.IdVenta;
+                            venta.Cliente = item.JFernandezCliente.NombreC;
+                            venta.Total = (float)item.Total;
+                            venta.MetodoPago = item.JFernandezMetodoPago.Metodo;
+                            venta.Fecha = (DateTime)item.Fecha;
+                            result.Objects.Add(venta);
+                        }
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static ML.Result AddEF(ML.Venta venta)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.AddVenta(venta.IdCliente, venta.Total, venta.IdMetodoPago, venta.Fecha);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido" + e;
+            }
+            return result;
+        }
+
+        public static ML.Result DeleteEF(ML.Venta venta)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+                {
+                    var query = context.DeleteVenta(venta.IdVenta);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
                     }
                 }
             }

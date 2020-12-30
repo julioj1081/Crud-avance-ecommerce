@@ -131,7 +131,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_JFernandezProductoSucursal_JFernandezProductos1">
+  <Association Name="FK_JFernandezProductoSucursal_JFernandezProductoSucursal">
+    <End Role="JFernandezProductoSucursal" Type="Self.JFernandezProductoSucursal" Multiplicity="1" />
+    <End Role="JFernandezProductoSucursal1" Type="Self.JFernandezProductoSucursal" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="JFernandezProductoSucursal">
+        <PropertyRef Name="IdProductoSucursal" />
+      </Principal>
+      <Dependent Role="JFernandezProductoSucursal1">
+        <PropertyRef Name="IdProductoSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JFernandezProductoSucursal_JFernandezSucursal1">
     <End Role="JFernandezProductos" Type="Self.JFernandezProductos" Multiplicity="0..1" />
     <End Role="JFernandezProductoSucursal" Type="Self.JFernandezProductoSucursal" Multiplicity="*" />
     <ReferentialConstraint>
@@ -140,18 +152,6 @@
       </Principal>
       <Dependent Role="JFernandezProductoSucursal">
         <PropertyRef Name="IdProducto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_JFernandezProductoSucursal_JFernandezSucursal">
-    <End Role="JFernandezSucursal" Type="Self.JFernandezSucursal" Multiplicity="0..1" />
-    <End Role="JFernandezProductoSucursal" Type="Self.JFernandezProductoSucursal" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="JFernandezSucursal">
-        <PropertyRef Name="IdSucursal" />
-      </Principal>
-      <Dependent Role="JFernandezProductoSucursal">
-        <PropertyRef Name="IdSucursal" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -203,7 +203,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_JFernandezVentaProducto_JFernandezVenta1">
+  <Association Name="FK_JFernandezVentaProducto_JFernandezVenta">
     <End Role="JFernandezVenta" Type="Self.JFernandezVenta" Multiplicity="0..1" />
     <End Role="JFernandezVentaProducto" Type="Self.JFernandezVentaProducto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -248,6 +248,18 @@
   <Function Name="AddSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NombreS" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="AddVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCliente" Type="int" Mode="In" />
+    <Parameter Name="Total" Type="float" Mode="In" />
+    <Parameter Name="IdMetodoPago" Type="int" Mode="In" />
+    <Parameter Name="Fecha" Type="date" Mode="In" />
+  </Function>
+  <Function Name="AddVentaProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdVenta" Type="int" Mode="In" />
+    <Parameter Name="IdProductoSucursal" Type="int" Mode="In" />
+    <Parameter Name="Cantidad" Type="int" Mode="In" />
+    <Parameter Name="IdProducto" Type="int" Mode="In" />
+  </Function>
   <Function Name="DeleteArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdArea" Type="int" Mode="In" />
   </Function>
@@ -272,6 +284,9 @@
   <Function Name="DeleteSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdSucursal" Type="int" Mode="In" />
   </Function>
+  <Function Name="DeleteVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdVenta" Type="int" Mode="In" />
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="GetAllArea" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetAllCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -282,8 +297,16 @@
   <Function Name="GetAllProductoSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetAllProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetAllSucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="GetByIdEF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="GetAllVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetAllVentaProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetByIdEF_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCliente" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetByIdEF_Departamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetByIdEF_Producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProducto" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -380,12 +403,12 @@
       <End Role="JFernandezProveedor" EntitySet="JFernandezProveedor" />
       <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
     </AssociationSet>
-    <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezProductos1" Association="Self.FK_JFernandezProductoSucursal_JFernandezProductos1">
-      <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
+    <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezProductoSucursal" Association="Self.FK_JFernandezProductoSucursal_JFernandezProductoSucursal">
       <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
+      <End Role="JFernandezProductoSucursal1" EntitySet="JFernandezProductoSucursal" />
     </AssociationSet>
-    <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezSucursal" Association="Self.FK_JFernandezProductoSucursal_JFernandezSucursal">
-      <End Role="JFernandezSucursal" EntitySet="JFernandezSucursal" />
+    <AssociationSet Name="FK_JFernandezProductoSucursal_JFernandezSucursal1" Association="Self.FK_JFernandezProductoSucursal_JFernandezSucursal1">
+      <End Role="JFernandezProductos" EntitySet="JFernandezProductos" />
       <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
     </AssociationSet>
     <AssociationSet Name="FK_JFernandezVenta_JFernandezCliente" Association="Self.FK_JFernandezVenta_JFernandezCliente">
@@ -404,7 +427,7 @@
       <End Role="JFernandezProductoSucursal" EntitySet="JFernandezProductoSucursal" />
       <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
     </AssociationSet>
-    <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezVenta1" Association="Self.FK_JFernandezVentaProducto_JFernandezVenta1">
+    <AssociationSet Name="FK_JFernandezVentaProducto_JFernandezVenta" Association="Self.FK_JFernandezVentaProducto_JFernandezVenta">
       <End Role="JFernandezVenta" EntitySet="JFernandezVenta" />
       <End Role="JFernandezVentaProducto" EntitySet="JFernandezVentaProducto" />
     </AssociationSet>

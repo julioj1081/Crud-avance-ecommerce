@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+@model ML.Producto
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Productos</h2>
+        </div>
+    </div>
+    <div class="row">
+        @using(Html.BeginForm("Registro", "Producto", FormMethod.Post))
+        {
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label>Nombre del producto</label>
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Descripcion)
+                    @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Descripcion)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Precio)
+                    @Html.TextBoxFor(model => model.Precio, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Precio)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.IdDepartamento)
+                    @Html.TextBoxFor(model => model.IdDepartamento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdDepartamento)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.IdProveedor)
+                    @Html.TextBoxFor(model => model.IdProveedor, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdProveedor)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <h3>Imagen</h3>
+                    <label>No disponible</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <input type="submit" value="Agregar Producto" class="btn btn-primary" />
+                    @Html.ActionLink("Regresar", "GetAllProducto", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

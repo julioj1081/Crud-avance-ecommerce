@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "GetAllVentaProducto";
+}
+@model ML.VentaProducto 
+<h2>GetAllVentaProducto</h2>
+
+<div class="container">
+    <div class="row">
+        <div style="float:right; margin-bottom: 1rem;">
+            @Html.ActionLink("Agregar detalle venta", "Add", "VentaProducto", htmlAttributes: new { @class="btn btn-success"})
+        </div>
+    </div>
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <td>IdDetalleVenta</td>
+                <td>IdVenta</td>
+                <td>Nombre Sucursal</td>
+                <td>Cantidad</td>
+                <td>Producto</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(ML.VentaProducto VentaProducto in Model.VentaProductos)
+            {
+                <tr>
+                    <td>@VentaProducto.IdVentaProducto</td>
+                    <td>@VentaProducto.Venta</td>
+                    <td>@VentaProducto.ProductoSucursal</td>
+                    <td>@VentaProducto.Cantidad</td>
+                    <td>@VentaProducto.Producto</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

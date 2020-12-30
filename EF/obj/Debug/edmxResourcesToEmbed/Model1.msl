@@ -3,15 +3,6 @@
   <EntityContainerMapping StorageEntityContainer="JFernandezEcommerceModelStoreContainer" CdmEntityContainer="JFernandezEcommerceEntities">
     <FunctionImportMapping FunctionImportName="AddDepartamento" FunctionName="JFernandezEcommerceModel.Store.AddDepartamento" />
     <FunctionImportMapping FunctionImportName="DeleteDepartamento" FunctionName="JFernandezEcommerceModel.Store.DeleteDepartamento" />
-    <FunctionImportMapping FunctionImportName="GetByIdEF" FunctionName="JFernandezEcommerceModel.Store.GetByIdEF">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetByIdEF_Result">
-          <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-          <ScalarProperty Name="NombreD" ColumnName="NombreD" />
-          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UpdateDepartamento" FunctionName="JFernandezEcommerceModel.Store.UpdateDepartamento" />
     <FunctionImportMapping FunctionImportName="AddArea" FunctionName="JFernandezEcommerceModel.Store.AddArea" />
     <FunctionImportMapping FunctionImportName="AddProducto" FunctionName="JFernandezEcommerceModel.Store.AddProducto" />
@@ -246,5 +237,61 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UpdateCliente" FunctionName="JFernandezEcommerceModel.Store.UpdateCliente" />
     <FunctionImportMapping FunctionImportName="UpdateMetodoPago" FunctionName="JFernandezEcommerceModel.Store.UpdateMetodoPago" />
+    <FunctionImportMapping FunctionImportName="AddVenta" FunctionName="JFernandezEcommerceModel.Store.AddVenta" />
+    <FunctionImportMapping FunctionImportName="AddVentaProducto" FunctionName="JFernandezEcommerceModel.Store.AddVentaProducto" />
+    <FunctionImportMapping FunctionImportName="GetAllVenta" FunctionName="JFernandezEcommerceModel.Store.GetAllVenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllVenta_Result">
+          <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+          <ScalarProperty Name="NombreC" ColumnName="NombreC" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetByIdEF_Departamento" FunctionName="JFernandezEcommerceModel.Store.GetByIdEF_Departamento">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetByIdEF_Departamento_Result">
+          <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+          <ScalarProperty Name="NombreD" ColumnName="NombreD" />
+          <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetByIdEF_Cliente" FunctionName="JFernandezEcommerceModel.Store.GetByIdEF_Cliente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetByIdEF_Cliente_Result">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="NombreC" ColumnName="NombreC" />
+          <ScalarProperty Name="Rfc" ColumnName="Rfc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetByIdEF_Producto" FunctionName="JFernandezEcommerceModel.Store.GetByIdEF_Producto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetByIdEF_Producto_Result">
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DeleteVenta" FunctionName="JFernandezEcommerceModel.Store.DeleteVenta" />
+    <FunctionImportMapping FunctionImportName="GetAllVentaProducto" FunctionName="JFernandezEcommerceModel.Store.GetAllVentaProducto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JFernandezEcommerceModel.GetAllVentaProducto_Result">
+          <ScalarProperty Name="IdVentaProducto" ColumnName="IdVentaProducto" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Nombre_Sucursal" ColumnName="Nombre Sucursal" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Nombre_del_producto" ColumnName="Nombre del producto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -17,5 +17,7 @@ namespace ML
         public int IdProveedor { get; set; }
         public string Proveedor { get; set; }
         public string Image { get; set; }
+
+        public List<object> Productos { get; set; }
     }
 }

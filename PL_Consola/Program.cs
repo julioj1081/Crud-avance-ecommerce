@@ -226,7 +226,7 @@ namespace PL_Consola
                         break;
                     case 10:
                         Console.WriteLine("Insertar 1");
-                        //Console.WriteLine("Mostrar 2");
+                        Console.WriteLine("Mostrar 2");
                         opcion = int.Parse(Console.ReadLine());
                         switch (opcion)
                         {
@@ -234,7 +234,7 @@ namespace PL_Consola
                                 PL_Consola.VentaProducto.Add();
                                 break;
                             case 2:
-                                //PL_Consola.Venta.GetAll();
+                                PL_Consola.VentaProducto.GetAll();
                                 break;
                         }
                         break;

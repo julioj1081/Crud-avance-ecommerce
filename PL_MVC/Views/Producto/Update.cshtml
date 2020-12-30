@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+}
+@model ML.Producto
+
+<h2>Update</h2>
+<div class="container">
+    <div class="row">
+        <h2>Update Producto</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using(Html.BeginForm("Actualizar", "Producto", FormMethod.Post))
+            {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdProducto, new { @class = "control-label col-md-2"})
+                        @Html.TextBoxFor(model => model.IdProducto, new { @class = "form-control", @readOnly = true })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Nombre, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Descripcion, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Precio, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdDepartamento, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.IdDepartamento, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdProveedor, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.IdProveedor, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <h3>Imagen</h3>
+                        <label>No disponible</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input type="submit" value="Modificar Producto" class="btn btn-primary" />
+                        @Html.ActionLink("Regresar", "GetAllProducto", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

@@ -52,6 +52,7 @@ C:\Users\julio\source\repos\CrudD\PL_MVC\bin\roslyn\VBCSCompiler.exe
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\Antlr3.Runtime.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\BL.dll
+C:\Users\julio\source\repos\CrudD\PL_MVC\bin\DL_SQL-client.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EntityFramework.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EntityFramework.SqlServer.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -67,9 +68,9 @@ C:\Users\julio\source\repos\CrudD\PL_MVC\bin\System.Web.WebPages.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\System.Web.WebPages.Razor.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\WebGrease.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EF.dll
-C:\Users\julio\source\repos\CrudD\PL_MVC\bin\DL_SQL-client.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\BL.pdb
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\BL.dll.config
+C:\Users\julio\source\repos\CrudD\PL_MVC\bin\DL_SQL-client.pdb
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\ML.pdb
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EntityFramework.xml
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EntityFramework.SqlServer.xml
@@ -85,7 +86,6 @@ C:\Users\julio\source\repos\CrudD\PL_MVC\bin\Antlr3.Runtime.pdb
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EF.pdb
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\EF.dll.config
-C:\Users\julio\source\repos\CrudD\PL_MVC\bin\DL_SQL-client.pdb
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\es\System.Web.Helpers.resources.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\es\System.Web.Mvc.resources.dll
 C:\Users\julio\source\repos\CrudD\PL_MVC\bin\es\System.Web.Optimization.resources.dll
