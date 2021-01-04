@@ -26,8 +26,8 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddDepartamento";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreD", departamento.NombreD);
-                        cmd.Parameters.AddWithValue("@IdArea", departamento.IdArea);
+                        cmd.Parameters.AddWithValue("@NombreD", departamento.Nombre);
+                        cmd.Parameters.AddWithValue("@IdArea", departamento.Area.IdArea);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
                         {
@@ -60,6 +60,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "DeleteDepartamento";
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@IdDepartamento", departamento.IdDepartamento);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
                         {
@@ -93,8 +94,8 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateDepartamento";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreD", departamento.NombreD);
-                        cmd.Parameters.AddWithValue("@IdArea", departamento.IdArea);
+                        cmd.Parameters.AddWithValue("@NombreD", departamento.Nombre);
+                        cmd.Parameters.AddWithValue("@IdArea", departamento.Area.IdArea);
                         cmd.Parameters.AddWithValue("@IdDepartamento", departamento.IdDepartamento);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
@@ -139,9 +140,11 @@ namespace BL
                             {
                                 ML.Departamento departamento = new ML.Departamento();
                                 departamento.IdDepartamento = int.Parse(row[0].ToString());
-                                departamento.NombreD = row[1].ToString();
+                                departamento.Nombre = row[1].ToString();
                                 //departamento.IdArea = int.Parse(row[2].ToString());
-                                departamento.Are = row[2].ToString();
+                                departamento.Area = new ML.Area();
+                                departamento.Area.Nombre = row[2].ToString();
+
                                 result.Objects.Add(departamento);
 
                             }
@@ -193,9 +196,10 @@ namespace BL
                         {
                             ML.Departamento depa = new ML.Departamento();
                             depa.IdDepartamento = item.IdDepartamento;
-                            depa.NombreD = item.NombreD;
+                            depa.Nombre = item.NombreD;
                             //depa.IdArea = (int)item.IdArea;
-                            depa.Are = item.JFernandezArea.NombreA;
+                            depa.Area = new ML.Area();
+                            depa.Area.Nombre = item.JFernandezArea.NombreA;
                             result.Objects.Add(depa);
                         }
                         result.Correct = true;
@@ -221,7 +225,7 @@ namespace BL
             {
                 using(EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.AddDepartamento(departamento.NombreD,(int) departamento.IdArea);
+                    var query = context.AddDepartamento(departamento.Nombre,(int) departamento.Area.IdArea);
                     if(query >= 1)
                     {
                         result.Correct = true;
@@ -276,8 +280,8 @@ namespace BL
                     {
                         ML.Departamento depa = new ML.Departamento();
                         depa.IdDepartamento = result.IdDepartamento;
-                        depa.NombreD = result.NombreD;
-                        depa.IdArea = Convert.ToInt32(result.IdArea);
+                        depa.Nombre = result.NombreD;
+                        depa.Area.IdArea = Convert.ToInt32(result.IdArea);
                         resultado.Object = depa;
                     }
                     resultado.Correct = true;
@@ -298,7 +302,7 @@ namespace BL
             {
                 using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.UpdateDepartamento(departamento.NombreD, departamento.IdArea, departamento.IdDepartamento);
+                    var query = context.UpdateDepartamento(departamento.Nombre, departamento.Area.IdArea, departamento.IdDepartamento);
                     if (query >= 1)
                     {
                         result.Correct = true;

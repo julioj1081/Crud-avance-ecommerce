@@ -13,14 +13,16 @@ namespace PL_Consola
         {
             ML.Venta venta = new ML.Venta();
             Console.WriteLine("Selecciona el ID del Cliente");
-            venta.IdCliente = int.Parse(Console.ReadLine());
+            venta.Cliente = new ML.Cliente();
+            venta.Cliente.IdCliente = int.Parse(Console.ReadLine());
             //Preguntar si es que se debe de tomar de cantidad * precio de cada producto de ventaproducto
             //para que se agrege al total
             Console.WriteLine("Total || cantidad pago?");
             venta.Total = float.Parse(Console.ReadLine());
             //
             Console.WriteLine("Ingresa el Id de Metodo del pago");
-            venta.IdMetodoPago = int.Parse(Console.ReadLine());
+            venta.MetodoPago = new ML.MetodoPago();
+            venta.MetodoPago.IdMetodoPago = int.Parse(Console.ReadLine());
             DateTime fecha = DateTime.Now;
             Console.WriteLine("Se realizo la venta el dia: "+fecha);
             venta.Fecha = fecha;
@@ -61,7 +63,7 @@ namespace PL_Consola
             {
                 foreach (ML.Venta venta in result.Objects)
                 {
-                    Console.WriteLine("IdVenta: " + venta.IdVenta + " Cliente:" + venta.Cliente + " Total: "+ venta.Total + " Metodo pago: "+ venta.MetodoPago + " "+ venta.Fecha);
+                    Console.WriteLine("IdVenta: " + venta.IdVenta + " Cliente:" + venta.Cliente.Nombre + " Total: "+ venta.Total + " Metodo pago: "+ venta.MetodoPago.Metodo + " "+ venta.Fecha);
                 }
             }
             else

@@ -26,9 +26,9 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddVenta";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IdCliente", venta.IdCliente);
+                        cmd.Parameters.AddWithValue("@IdCliente", venta.Cliente.IdCliente);
                         cmd.Parameters.AddWithValue("@Total", venta.Total);
-                        cmd.Parameters.AddWithValue("@IdMetodoPago", venta.IdMetodoPago);
+                        cmd.Parameters.AddWithValue("@IdMetodoPago", venta.MetodoPago.IdMetodoPago);
                         cmd.Parameters.AddWithValue("@Fecha", venta.Fecha);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
@@ -68,14 +68,14 @@ namespace BL
                         else
                         {
                             result.Correct = false;
-                            result.ErrorMessage = "Error desconocido";
+                            result.ErrorMessage = "Error este cliente tiene una venta de producto";
                         }
                     }
                 }
             }catch(Exception e)
             {
-                result.Correct = false;
-                result.ErrorMessage = "Error desconocido";
+                result.Correct = false; 
+                result.ErrorMessage = "Error este cliente tiene una venta de detalle";
             }
             return result;
         }
@@ -102,9 +102,15 @@ namespace BL
                             {
                                 ML.Venta venta = new ML.Venta();
                                 venta.IdVenta = int.Parse(row[0].ToString());
-                                venta.Cliente = row[1].ToString();
+
+                                venta.Cliente = new ML.Cliente();
+                                venta.Cliente.Nombre = row[1].ToString();
+                                
                                 venta.Total = float.Parse(row[2].ToString());
-                                venta.MetodoPago = row[3].ToString();
+
+                                venta.MetodoPago = new ML.MetodoPago();
+                                venta.MetodoPago.Metodo = row[3].ToString();
+                                
                                 venta.Fecha = Convert.ToDateTime(row[4]);
                                 result.Objects.Add(venta);
                             }
@@ -143,9 +149,11 @@ namespace BL
                         {
                             ML.Venta venta = new ML.Venta();
                             venta.IdVenta = item.IdVenta;
-                            venta.Cliente = item.JFernandezCliente.NombreC;
+                            venta.Cliente = new ML.Cliente();
+                            venta.Cliente.Nombre = item.JFernandezCliente.NombreC;
                             venta.Total = (float)item.Total;
-                            venta.MetodoPago = item.JFernandezMetodoPago.Metodo;
+                            venta.MetodoPago = new ML.MetodoPago();
+                            venta.MetodoPago.Metodo = item.JFernandezMetodoPago.Metodo;
                             venta.Fecha = (DateTime)item.Fecha;
                             result.Objects.Add(venta);
                         }
@@ -173,7 +181,7 @@ namespace BL
             {
                 using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.AddVenta(venta.IdCliente, venta.Total, venta.IdMetodoPago, venta.Fecha);
+                    var query = context.AddVenta(venta.Cliente.IdCliente, venta.Total, venta.MetodoPago.IdMetodoPago, venta.Fecha);
                     if (query >= 1)
                     {
                         result.Correct = true;

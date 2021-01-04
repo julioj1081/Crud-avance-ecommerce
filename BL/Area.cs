@@ -25,7 +25,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddArea";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreA", area.NombreA);
+                        cmd.Parameters.AddWithValue("@NombreA", area.Nombre);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if(RowsAffected > 0)
                         {
@@ -87,7 +87,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateArea";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreA", area.NombreA);
+                        cmd.Parameters.AddWithValue("@NombreA", area.Nombre);
                         cmd.Parameters.AddWithValue("@IdArea", area.IdArea);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
@@ -131,7 +131,7 @@ namespace BL
                             {
                                 ML.Area area = new ML.Area();
                                 area.IdArea = int.Parse(row[0].ToString());
-                                area.NombreA = row[1].ToString();
+                                area.Nombre = row[1].ToString();
                                 result.Objects.Add(area);
                             }
                             result.Correct = true;

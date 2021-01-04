@@ -9,6 +9,6 @@ namespace ML
     public class Sucursal
     {
         public int IdSucursal { get; set; }
-        public string NombreS { get; set; }
+        public string Nombre { get; set; }
     }
 }

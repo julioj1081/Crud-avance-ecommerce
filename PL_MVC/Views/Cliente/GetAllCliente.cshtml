@@ -27,7 +27,7 @@
                 <tr>
                     <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Update", "Cliente", new { Id = client.IdCliente })"></a></td>
                     <td>@client.IdCliente</td>
-                    <td>@client.NombreC</td>
+                    <td>@client.Nombre</td>
                     <td>@client.Rfc</td>
                     <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Cliente", new { IdCliente = client.IdCliente})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');" ;></a></td>
                 </tr>

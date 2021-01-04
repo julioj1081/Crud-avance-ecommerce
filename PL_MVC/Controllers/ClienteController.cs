@@ -61,7 +61,7 @@ namespace PL_MVC.Controllers
             {
                 ML.Cliente client = new ML.Cliente();
                 client.IdCliente = ((ML.Cliente)result.Object).IdCliente;
-                client.NombreC = ((ML.Cliente)result.Object).NombreC;
+                client.Nombre = ((ML.Cliente)result.Object).Nombre;
                 client.Rfc = ((ML.Cliente)result.Object).Rfc;
                 return View(client);
             }

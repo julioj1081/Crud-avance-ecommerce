@@ -12,13 +12,16 @@ namespace PL_Consola
         {
             ML.VentaProducto ventaProducto= new ML.VentaProducto();
             Console.WriteLine("Ingrese el Id de venta");
-            ventaProducto.IdVenta = int.Parse(Console.ReadLine());
+            ventaProducto.Venta= new ML.Venta();
+            ventaProducto.Venta.IdVenta = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingresa el Id de producto Sucursal");
-            ventaProducto.IdProductoSucursal = int.Parse(Console.ReadLine());
+            ventaProducto.ProductoSucursal = new ML.ProductoSucursal();
+            ventaProducto.ProductoSucursal.IdProductoSucursal= int.Parse(Console.ReadLine());
             Console.WriteLine("Ingresa cantidad");
             ventaProducto.Cantidad = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingresa el Id del Producto");
-            ventaProducto.IdProducto = int.Parse(Console.ReadLine());
+            ventaProducto.Producto = new ML.Producto();
+            ventaProducto.Producto.IdProducto = int.Parse(Console.ReadLine());
             //Se va a BL
             ML.Result result = BL.VentaProducto.AddVentaProducto(ventaProducto);
             if (result.Correct)

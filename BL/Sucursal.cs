@@ -24,7 +24,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddSucursal";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreS", sucursal.NombreS);
+                        cmd.Parameters.AddWithValue("@NombreS", sucursal.Nombre);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
                         {
@@ -88,7 +88,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateSucursal";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreS", sucursal.NombreS);
+                        cmd.Parameters.AddWithValue("@NombreS", sucursal.Nombre);
                         cmd.Parameters.AddWithValue("@IdSucursal", sucursal.IdSucursal);
                         int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
@@ -133,7 +133,7 @@ namespace BL
                             {
                                 ML.Sucursal sucursal = new ML.Sucursal();
                                 sucursal.IdSucursal = int.Parse(row[0].ToString());
-                                sucursal.NombreS = row[1].ToString();
+                                sucursal.Nombre = row[1].ToString();
                                 result.Objects.Add(sucursal);
                             }
                             result.Correct = true;

@@ -28,7 +28,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddCliente";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreC", cliente.NombreC);
+                        cmd.Parameters.AddWithValue("@NombreC", cliente.Nombre);
                         cmd.Parameters.AddWithValue("@Rfc", cliente.Rfc);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
@@ -68,7 +68,7 @@ namespace BL
                         else
                         {
                             result.Correct = false;
-                            result.ErrorMessage = "Error desconocido";
+                            result.ErrorMessage = "Este cliente tiene una venta";
                         }
                     }
                 }
@@ -93,7 +93,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateCliente";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreC", cliente.NombreC);
+                        cmd.Parameters.AddWithValue("@NombreC", cliente.Nombre);
                         cmd.Parameters.AddWithValue("@Rfc", cliente.Rfc);
                         cmd.Parameters.AddWithValue("@IdCliente", cliente.IdCliente);
                         int rows = cmd.ExecuteNonQuery();
@@ -139,7 +139,7 @@ namespace BL
                             {
                                 ML.Cliente cliente = new ML.Cliente();
                                 cliente.IdCliente = int.Parse(row[0].ToString());
-                                cliente.NombreC = row[1].ToString();
+                                cliente.Nombre = row[1].ToString();
                                 cliente.Rfc = row[2].ToString();
                                 result.Objects.Add(cliente);
                             }
@@ -179,7 +179,7 @@ namespace BL
                         {
                             ML.Cliente client = new ML.Cliente();
                             client.IdCliente= item.IdCliente;
-                            client.NombreC = item.NombreC;
+                            client.Nombre = item.NombreC;
                             client.Rfc = item.Rfc;
                             result.Objects.Add(client);
                         }
@@ -207,7 +207,7 @@ namespace BL
             {
                 using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.AddCliente(cliente.NombreC, cliente.Rfc);
+                    var query = context.AddCliente(cliente.Nombre, cliente.Rfc);
                     if (query >= 1)
                     {
                         result.Correct = true;
@@ -265,7 +265,7 @@ namespace BL
                     {
                         ML.Cliente client = new ML.Cliente();
                         client.IdCliente = result.IdCliente;
-                        client.NombreC = result.NombreC;
+                        client.Nombre = result.NombreC;
                         client.Rfc = result.Rfc;
                         resultado.Object = client;
                     }
@@ -287,7 +287,7 @@ namespace BL
             {
                 using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.UpdateCliente(cliente.NombreC, cliente.Rfc, cliente.IdCliente);
+                    var query = context.UpdateCliente(cliente.Nombre, cliente.Rfc, cliente.IdCliente);
                     if (query >= 1)
                     {
                         result.Correct = true;

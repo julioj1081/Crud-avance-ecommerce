@@ -13,7 +13,7 @@ namespace PL_Consola
         {
             ML.Area area = new ML.Area();
             Console.WriteLine("Ingrese el Nombre del area");
-            area.NombreA = Console.ReadLine();
+            area.Nombre = Console.ReadLine();
             //Se va a BL
             ML.Result result = BL.Area.AddArea(area);
             if (result.Correct)
@@ -52,7 +52,7 @@ namespace PL_Consola
                 area.IdArea = int.Parse(Console.ReadLine());
                 //
                 Console.WriteLine("Ingresa Nombre de la nueva area");
-                area.NombreA = Console.ReadLine();
+                area.Nombre = Console.ReadLine();
                 //Se va al BL
                 ML.Result res = BL.Area.UpdateArea(area);
                 if (res.Correct)
@@ -78,7 +78,7 @@ namespace PL_Consola
             {
                 foreach(ML.Area area in result.Objects)
                 {
-                    Console.WriteLine("IdArea: " + area.IdArea + " Area:" + area.NombreA);
+                    Console.WriteLine("IdArea: " + area.IdArea + " Area:" + area.Nombre);
                 }
             }
             else

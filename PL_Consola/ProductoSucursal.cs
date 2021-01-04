@@ -12,9 +12,11 @@ namespace PL_Consola
         {
             ML.ProductoSucursal productosucursal = new ML.ProductoSucursal();
             Console.WriteLine("Ingresa el IdProducto");
-            productosucursal.IdProducto = int.Parse(Console.ReadLine());
+            productosucursal.Producto = new ML.Producto();
+            productosucursal.Producto.IdProducto = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingresa el IdSucursal");
-            productosucursal.IdSucursal = int.Parse(Console.ReadLine());
+            productosucursal.Sucursal = new ML.Sucursal();
+            productosucursal.Sucursal.IdSucursal = int.Parse(Console.ReadLine());
             //Se va a BL
             ML.Result result = BL.ProductoSucursal.AddProductoSucursal(productosucursal);
             if (result.Correct)
@@ -53,9 +55,11 @@ namespace PL_Consola
                 productoSucursal.IdProductoSucursal = int.Parse(Console.ReadLine());
                 //
                 Console.WriteLine("Ingresa IdProducto nuevo");
-                productoSucursal.IdProducto = int.Parse(Console.ReadLine());
+                productoSucursal.Producto = new ML.Producto();
+                productoSucursal.Producto.IdProducto = int.Parse(Console.ReadLine());
                 Console.WriteLine("Ingresa IdSucursal nuevo");
-                productoSucursal.IdSucursal = int.Parse(Console.ReadLine());
+                productoSucursal.Sucursal = new ML.Sucursal();
+                productoSucursal.Sucursal.IdSucursal = int.Parse(Console.ReadLine());
                 //Se va al BL
                 ML.Result res = BL.ProductoSucursal.UpdateProductoSucursal(productoSucursal);
                 if (res.Correct)
@@ -82,7 +86,7 @@ namespace PL_Consola
             {
                 foreach (ML.ProductoSucursal productoSucursal in result.Objects)
                 {
-                    Console.WriteLine("IdProductoSucursal: " + productoSucursal.IdProductoSucursal + " Producto:" + productoSucursal.Producto+ " Sucursal:"+productoSucursal.Sucursal);
+                    Console.WriteLine("IdProductoSucursal: " + productoSucursal.IdProductoSucursal + " Producto:" + productoSucursal.Producto.Nombre+ " Sucursal:"+productoSucursal.Sucursal.Nombre);
                 }
             }
             else

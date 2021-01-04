@@ -10,11 +10,13 @@ namespace ML
     public class Venta
     {
         public int IdVenta{get;set;}
-        public int IdCliente { get; set; }
-        public string Cliente { get; set; }
+        //public int IdCliente { get; set; }
+        //public string Cliente { get; set; }
+        public ML.Cliente Cliente { get; set; }
         public float Total { get; set; }
-        public int IdMetodoPago { get; set; }
-        public string MetodoPago { get; set; }
+        //public int IdMetodoPago { get; set; }
+        //public string MetodoPago { get; set; }
+        public ML.MetodoPago MetodoPago { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

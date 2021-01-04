@@ -22,7 +22,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddProveedor";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreProveedor", proveedor.NombreProvedor);
+                        cmd.Parameters.AddWithValue("@NombreProveedor", proveedor.Nombre);
                         cmd.Parameters.AddWithValue("@Telefono", proveedor.Telefono);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
@@ -90,7 +90,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateProveedor";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreProveedor", proveedor.NombreProvedor);
+                        cmd.Parameters.AddWithValue("@NombreProveedor", proveedor.Nombre);
                         cmd.Parameters.AddWithValue("@Telefono", proveedor.Telefono);
                         cmd.Parameters.AddWithValue("@IdProveedor", proveedor.IdProveedor);
                         int rows = cmd.ExecuteNonQuery();
@@ -135,7 +135,7 @@ namespace BL
                             {
                                 ML.Proveedor proveedor = new ML.Proveedor();
                                 proveedor.IdProveedor = int.Parse(row[0].ToString());
-                                proveedor.NombreProvedor = row[1].ToString();
+                                proveedor.Nombre = row[1].ToString();
                                 proveedor.Telefono = row[2].ToString();
                                 result.Objects.Add(proveedor);
                             }

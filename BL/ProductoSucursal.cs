@@ -23,8 +23,8 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddProductoSucursal";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IdProducto", productosucursal.IdProducto);
-                        cmd.Parameters.AddWithValue("@IdSucursal", productosucursal.IdSucursal);
+                        cmd.Parameters.AddWithValue("@IdProducto", productosucursal.Producto.IdProducto);
+                        cmd.Parameters.AddWithValue("@IdSucursal", productosucursal.Sucursal.IdSucursal);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
                         {
@@ -88,8 +88,8 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateProductoSucursal";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IdProducto", productosucursal.IdProducto);
-                        cmd.Parameters.AddWithValue("@IdSucursal", productosucursal.IdSucursal);
+                        cmd.Parameters.AddWithValue("@IdProducto", productosucursal.Producto.IdProducto);
+                        cmd.Parameters.AddWithValue("@IdSucursal", productosucursal.Sucursal.IdSucursal);
                         cmd.Parameters.AddWithValue("@IdProductoSucursal", productosucursal.IdProductoSucursal);
                         int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
@@ -135,9 +135,11 @@ namespace BL
                                 ML.ProductoSucursal productoSucursal = new ML.ProductoSucursal();
                                 productoSucursal.IdProductoSucursal = int.Parse(row[0].ToString());
                                 //productoSucursal.IdProducto = int.Parse(row[1].ToString());
-                                productoSucursal.Producto = row[1].ToString();
+                                productoSucursal.Producto = new ML.Producto();
+                                productoSucursal.Producto.Nombre = row[1].ToString();
                                 //productoSucursal.IdSucursal = int.Parse(row[2].ToString());
-                                productoSucursal.Sucursal = row[2].ToString();
+                                productoSucursal.Sucursal = new ML.Sucursal();
+                                productoSucursal.Sucursal.Nombre = row[2].ToString();
                                 result.Objects.Add(productoSucursal);
                             }
                             result.Correct = true;

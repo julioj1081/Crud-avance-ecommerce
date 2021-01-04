@@ -67,8 +67,12 @@ namespace PL_MVC.Controllers
                 product.Nombre = ((ML.Producto)result.Object).Nombre;
                 product.Descripcion = ((ML.Producto)result.Object).Descripcion;
                 product.Precio = ((ML.Producto)result.Object).Precio;
-                product.IdDepartamento = ((ML.Producto)result.Object).IdDepartamento;
-                product.IdProveedor = ((ML.Producto)result.Object).IdProveedor;
+                
+                product.Departamento = new Departamento();
+                product.Departamento.IdDepartamento = ((ML.Producto)result.Object).Departamento.IdDepartamento;
+                
+                product.Proveedor = new ML.Proveedor();
+                product.Proveedor.IdProveedor = ((ML.Producto)result.Object).Proveedor.IdProveedor;
                 //product.Image = ((ML.Producto)result.Object).Image;
 
                 return View(product);

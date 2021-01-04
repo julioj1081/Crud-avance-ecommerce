@@ -12,7 +12,7 @@ namespace PL_Consola
         {
             ML.Proveedor proveedor = new ML.Proveedor();
             Console.WriteLine("Ingresa Nombre del proveedor");
-            proveedor.NombreProvedor = Console.ReadLine();
+            proveedor.Nombre = Console.ReadLine();
             Console.WriteLine("Ingresa telefono del proveedor");
             proveedor.Telefono = Console.ReadLine();
             //Se va al BL
@@ -54,7 +54,7 @@ namespace PL_Consola
                 proveedor.IdProveedor = int.Parse(Console.ReadLine());
                 //
                 Console.WriteLine("Ingresa Nombre del nuevo proveedor");
-                proveedor.NombreProvedor = Console.ReadLine();
+                proveedor.Nombre = Console.ReadLine();
                 Console.WriteLine("Ingresa el telefono nuevo del proveedor");
                 proveedor.Telefono = Console.ReadLine();
                 //Se va al BL
@@ -83,7 +83,7 @@ namespace PL_Consola
             {
                 foreach (ML.Proveedor proveedor in result.Objects)
                 {
-                    Console.WriteLine("IdProveedor: " + proveedor.IdProveedor+ " Nombre:" + proveedor.NombreProvedor + " Telefono "+proveedor.Telefono);
+                    Console.WriteLine("IdProveedor: " + proveedor.IdProveedor+ " Nombre:" + proveedor.Nombre + " Telefono "+proveedor.Telefono);
                 }
             }
             else

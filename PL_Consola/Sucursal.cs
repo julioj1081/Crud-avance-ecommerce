@@ -12,7 +12,7 @@ namespace PL_Consola
         {
             ML.Sucursal sucursal = new ML.Sucursal();
             Console.WriteLine("Ingrese el Nombre de la sucursal");
-            sucursal.NombreS = Console.ReadLine();
+            sucursal.Nombre = Console.ReadLine();
             //Se va a BL
             ML.Result result = BL.Sucursal.AddSucursal(sucursal);
             if (result.Correct)
@@ -51,7 +51,7 @@ namespace PL_Consola
                 sucursal.IdSucursal = int.Parse(Console.ReadLine());
                 //
                 Console.WriteLine("Ingresa Nombre de la nueva sucursal");
-                sucursal.NombreS = Console.ReadLine();
+                sucursal.Nombre = Console.ReadLine();
                 //Se va al BL
                 ML.Result res = BL.Sucursal.UpdateSucursal(sucursal);
                 if (res.Correct)
@@ -78,7 +78,7 @@ namespace PL_Consola
             {
                 foreach (ML.Sucursal sucursal in result.Objects)
                 {
-                    Console.WriteLine("IdSucursal: " + sucursal.IdSucursal + " Nombre:" + sucursal.NombreS);
+                    Console.WriteLine("IdSucursal: " + sucursal.IdSucursal + " Nombre:" + sucursal.Nombre);
                 }
             }
             else

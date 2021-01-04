@@ -12,9 +12,10 @@ namespace PL_Consola
         {
             ML.Departamento departamento = new ML.Departamento();
             Console.WriteLine("Ingresa Nombre Departamento");
-            departamento.NombreD = Console.ReadLine();
+            departamento.Nombre = Console.ReadLine();
             Console.WriteLine("Ingresa Id Del area");
-            departamento.IdArea = int.Parse(Console.ReadLine());
+            departamento.Area = new ML.Area();
+            departamento.Area.IdArea = int.Parse(Console.ReadLine());
             //Se va al BL
             ML.Result result = BL.Departamento.AddDepartamento(departamento);
 
@@ -55,9 +56,10 @@ namespace PL_Consola
                 departamento.IdDepartamento = int.Parse(Console.ReadLine());
                 //
                 Console.WriteLine("Ingresa Nombre del nuevo departamento");
-                departamento.NombreD = Console.ReadLine();
+                departamento.Nombre = Console.ReadLine();
                 Console.WriteLine("Ingresa el Id Del Area");
-                departamento.IdArea = int.Parse(Console.ReadLine());
+                departamento.Area = new ML.Area();
+                departamento.Area.IdArea = int.Parse(Console.ReadLine());
                 //Se va al BL
                 ML.Result res = BL.Departamento.UpdateDepartamento(departamento);
                 if (res.Correct)
@@ -84,7 +86,7 @@ namespace PL_Consola
             {
                 foreach (ML.Departamento departamento in result.Objects)
                 {
-                    Console.WriteLine("IdDepartamento: " + departamento.IdDepartamento + " Departamento:" + departamento.NombreD + " Area: "+departamento.Are);
+                    Console.WriteLine("IdDepartamento: " + departamento.IdDepartamento + " Departamento:" + departamento.Nombre + " Area: "+departamento.Area.Nombre);
                 }
             }
             else

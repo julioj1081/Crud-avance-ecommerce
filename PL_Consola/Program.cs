@@ -13,15 +13,15 @@ namespace PL_Consola
             try
             {
                 Console.WriteLine("1 Area");
-                Console.WriteLine("2 Departamento");
+                Console.WriteLine("2 Departamento"); //
                 Console.WriteLine("3 Proveedor");
-                Console.WriteLine("4 Producto");
+                Console.WriteLine("4 Producto"); //
                 Console.WriteLine("5 Sucursal");
                 Console.WriteLine("6 Producto Sucursal");
                 Console.WriteLine("7 MetodoPago");
-                Console.WriteLine("8 Cliente");
-                Console.WriteLine("9 Venta");
-                Console.WriteLine("10 VentaProducto");
+                Console.WriteLine("8 Cliente"); //
+                Console.WriteLine("9 Venta"); //
+                Console.WriteLine("10 VentaProducto");//
                 int caso = int.Parse(Console.ReadLine());
                 switch (caso)
                 {
@@ -231,10 +231,10 @@ namespace PL_Consola
                         switch (opcion)
                         {
                             case 1:
-                                PL_Consola.VentaProducto.Add();
+                                //PL_Consola.VentaProducto.Add();
                                 break;
                             case 2:
-                                PL_Consola.VentaProducto.GetAll();
+                                //PL_Consola.VentaProducto.GetAll();
                                 break;
                         }
                         break;

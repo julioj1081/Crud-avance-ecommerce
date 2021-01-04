@@ -37,11 +37,17 @@ namespace BL
                                 ML.VentaProducto VentaProducto = new ML.VentaProducto();
                                 VentaProducto.IdVentaProducto = int.Parse(row[0].ToString());
                                 //VentaProducto.IdVenta = int.Parse(row[1].ToString());
-                                VentaProducto.Venta = row[1].ToString();
+                                VentaProducto.Venta = new ML.Venta();
+                                VentaProducto.Venta.IdVenta = int.Parse(row[1].ToString());
                                 //VentaProducto.IdProductoSucursal = int.Parse(row[2].ToString());
-                                VentaProducto.ProductoSucursal = row[2].ToString();
+                                
+                                VentaProducto.ProductoSucursal = new ML.ProductoSucursal();
+                                VentaProducto.ProductoSucursal.Sucursal.Nombre = row[2].ToString();
+                                
                                 VentaProducto.Cantidad = int.Parse(row[3].ToString());
-                                VentaProducto.Producto = row[4].ToString();
+                                
+                                VentaProducto.Producto = new ML.Producto();
+                                VentaProducto.Producto.Nombre = row[4].ToString();
                                 //VentaProducto.IdProducto = int.Parse(row[4].ToString());
                                 result.Objects.Add(VentaProducto);
                             }
@@ -75,10 +81,10 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddVentaProducto";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IdVenta", ventaProducto.IdVenta);
-                        cmd.Parameters.AddWithValue("@IdProductoSucursal", ventaProducto.IdProductoSucursal);
+                        cmd.Parameters.AddWithValue("@IdVenta", ventaProducto.Venta.IdVenta);
+                        cmd.Parameters.AddWithValue("@IdProductoSucursal", ventaProducto.ProductoSucursal.IdProductoSucursal);
                         cmd.Parameters.AddWithValue("@Cantidad", ventaProducto.Cantidad);
-                        cmd.Parameters.AddWithValue("@IdProducto", ventaProducto.IdProducto);
+                        cmd.Parameters.AddWithValue("@IdProducto", ventaProducto.Producto.IdProducto);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
                         {
@@ -113,10 +119,13 @@ namespace BL
                         {
                             ML.VentaProducto ventaProducto = new ML.VentaProducto();
                             ventaProducto.IdVentaProducto = item.IdVentaProducto;
-                            ventaProducto.Venta = item.JFernandezVenta.JFernandezCliente.NombreC;
-                            ventaProducto.ProductoSucursal = item.JFernandezProductoSucursal.JFernandezSucursal.NombreS;
+                            ventaProducto.Venta = new ML.Venta();
+                            ventaProducto.Venta.Cliente.Nombre = item.JFernandezVenta.JFernandezCliente.NombreC;
+                            ventaProducto.ProductoSucursal = new ML.ProductoSucursal();
+                            ventaProducto.ProductoSucursal.Producto.Nombre = item.JFernandezProductoSucursal.JFernandezSucursal.NombreS;
                             ventaProducto.Cantidad = (int)item.Cantidad;
-                            ventaProducto.Producto = item.JFernandezProductos.Nombre;
+                            ventaProducto.Producto = new ML.Producto();
+                            ventaProducto.Producto.Nombre = item.JFernandezProductos.Nombre;
                             result.Objects.Add(ventaProducto);
                         }
                         result.Correct = true;
@@ -143,7 +152,7 @@ namespace BL
             {
                 using(EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.AddVentaProducto(ventaProducto.IdVenta, ventaProducto.IdProductoSucursal, ventaProducto.Cantidad, ventaProducto.IdProducto);
+                    var query = context.AddVentaProducto(ventaProducto.Venta.IdVenta, ventaProducto.ProductoSucursal.IdProductoSucursal, ventaProducto.Cantidad, ventaProducto.Producto.IdProducto);
                     if(query >= 1)
                     {
                         result.Correct = true;

@@ -63,8 +63,8 @@ namespace PL_MVC.Controllers
                 ML.Departamento depa = new ML.Departamento();
 
                 depa.IdDepartamento = ((ML.Departamento)result.Object).IdDepartamento;
-                depa.NombreD = ((ML.Departamento)result.Object).NombreD;
-                depa.IdArea = ((ML.Departamento)result.Object).IdArea;
+                depa.Nombre = ((ML.Departamento)result.Object).Nombre;
+                depa.Area.Nombre = ((ML.Departamento)result.Object).Area.Nombre;
 
                 return View(depa);
             }

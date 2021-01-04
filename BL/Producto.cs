@@ -29,8 +29,8 @@ namespace BL
                         cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
                         cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
                         cmd.Parameters.AddWithValue("@Precio", producto.Precio);
-                        cmd.Parameters.AddWithValue("@IdDepartamento", producto.IdDepartamento);
-                        cmd.Parameters.AddWithValue("@IdProveedor", producto.IdProveedor);
+                        cmd.Parameters.AddWithValue("@IdDepartamento", producto.Departamento.IdDepartamento);
+                        cmd.Parameters.AddWithValue("@IdProveedor", producto.Proveedor.IdProveedor);
                         cmd.Parameters.AddWithValue("@Image", Convert.FromBase64String(producto.Image));
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
@@ -101,8 +101,8 @@ namespace BL
                         cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
                         cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
                         cmd.Parameters.AddWithValue("@Precio",  producto.Precio);
-                        cmd.Parameters.AddWithValue("@IdDepartamento", producto.IdDepartamento);
-                        cmd.Parameters.AddWithValue("@IdProveedor", producto.IdProveedor);
+                        cmd.Parameters.AddWithValue("@IdDepartamento", producto.Departamento.IdDepartamento);
+                        cmd.Parameters.AddWithValue("@IdProveedor", producto.Proveedor.IdProveedor);
                         cmd.Parameters.AddWithValue("@Image", Convert.FromBase64String(producto.Image));
                         cmd.Parameters.AddWithValue("@IdProducto", producto.IdProducto);
                         int rows = cmd.ExecuteNonQuery();
@@ -152,9 +152,11 @@ namespace BL
                                 producto.Precio = decimal.Parse(row[3].ToString());
                                 //cambio a strings
                                 //producto.IdDepartamento = int.Parse(row[4].ToString());
-                                producto.Departamento = row[4].ToString();
+                                producto.Departamento = new ML.Departamento();
+                                producto.Departamento.Nombre = row[4].ToString();
                                 //producto.IdProveedor = int.Parse(row[5].ToString());
-                                producto.Proveedor = row[5].ToString();
+                                producto.Proveedor = new ML.Proveedor();
+                                producto.Proveedor.Nombre = row[5].ToString();
                                 producto.Image = row[6].ToString();
                                 result.Objects.Add(producto);
                             }
@@ -197,8 +199,10 @@ namespace BL
                             product.Nombre = item.Nombre;
                             product.Descripcion = item.Descripcion;
                             product.Precio = (int)item.Precio;
-                            product.Departamento = item.JFernandezDepartamento.NombreD;
-                            product.Proveedor = item.JFernandezProveedor.NombreProveedor;
+                            product.Departamento = new ML.Departamento();
+                            product.Departamento.Nombre = item.JFernandezDepartamento.NombreD;
+                            product.Proveedor = new ML.Proveedor();
+                            product.Proveedor.Nombre = item.JFernandezProveedor.NombreProveedor;
                             product.Image = "No disponible";
                             result.Objects.Add(product);
                         }
@@ -226,7 +230,7 @@ namespace BL
             {
                 using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.AddProducto(producto.Nombre, producto.Descripcion, (decimal) producto.Precio, (int)producto.IdDepartamento, (int)producto.IdProveedor, Convert.FromBase64String(producto.Image));
+                    var query = context.AddProducto(producto.Nombre, producto.Descripcion, (decimal) producto.Precio, (int)producto.Departamento.IdDepartamento, (int)producto.Proveedor.IdProveedor, Convert.FromBase64String(producto.Image));
                     if (query >= 1)
                     {
                         result.Correct = true;
@@ -287,8 +291,9 @@ namespace BL
                         product.Nombre = result.Nombre;
                         product.Descripcion = result.Descripcion;
                         product.Precio = (decimal)result.Precio;
-                        product.IdDepartamento = (int)result.IdDepartamento;
-                        product.IdProveedor = (int)result.IdProveedor;
+                        product.Departamento = new ML.Departamento();
+                        product.Departamento.IdDepartamento = (int)result.IdDepartamento;
+                        product.Proveedor.IdProveedor = (int)result.IdProveedor;
                         //falta la imagen
                         resultado.Object = product;
                     }
@@ -310,7 +315,7 @@ namespace BL
             {
                 using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
                 {
-                    var query = context.UpdateProducto(producto.Nombre, producto.Descripcion, (decimal)producto.Precio, (int)producto.IdDepartamento, (int)producto.IdProveedor, Convert.FromBase64String(producto.Image), (int)producto.IdProducto);
+                    var query = context.UpdateProducto(producto.Nombre, producto.Descripcion, (decimal)producto.Precio, (int)producto.Departamento.IdDepartamento, (int)producto.Proveedor.IdProveedor, Convert.FromBase64String(producto.Image), (int)producto.IdProducto);
                     if (query >= 1)
                     {
                         result.Correct = true;

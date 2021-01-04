@@ -12,7 +12,7 @@ namespace PL_Consola
         {
             ML.Cliente cliente = new ML.Cliente();
             Console.WriteLine("Ingrese el Nombre del cliente");
-            cliente.NombreC = Console.ReadLine();
+            cliente.Nombre = Console.ReadLine();
             Console.WriteLine("Ingresa RFC del cliente");
             cliente.Rfc = Console.ReadLine();
             //Se va a BL
@@ -53,7 +53,7 @@ namespace PL_Consola
                 cliente.IdCliente = int.Parse(Console.ReadLine());
                 //
                 Console.WriteLine("Ingresa el nuevo Nombre del cliente");
-                cliente.NombreC = Console.ReadLine();
+                cliente.Nombre = Console.ReadLine();
                 Console.WriteLine("Ingresa el nuevo RFC del cliente");
                 cliente.Rfc = Console.ReadLine();
                 //Se va al BL
@@ -82,7 +82,7 @@ namespace PL_Consola
             {
                 foreach (ML.Cliente cliente in result.Objects)
                 {
-                    Console.WriteLine("IdCliente: " + cliente.IdCliente + " Nombre:" + cliente.NombreC + " RFC:" + cliente.Rfc);
+                    Console.WriteLine("IdCliente: " + cliente.IdCliente + " Nombre:" + cliente.Nombre + " RFC:" + cliente.Rfc);
                 }
             }
             else

@@ -18,9 +18,11 @@ namespace PL_Consola
             Console.WriteLine("Ingresa precio del producto");
             producto.Precio = decimal.Parse(Console.ReadLine());
             Console.WriteLine("Ingresa el IdDepartamento");
-            producto.IdDepartamento = int.Parse(Console.ReadLine());
+            producto.Departamento = new ML.Departamento();
+            producto.Departamento.IdDepartamento = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingresa el IdProveedor");
-            producto.IdProveedor = int.Parse(Console.ReadLine());
+            producto.Proveedor = new ML.Proveedor();
+            producto.Proveedor.IdProveedor = int.Parse(Console.ReadLine());
             //imagen null
             
             producto.Image = "No disponible";
@@ -69,9 +71,11 @@ namespace PL_Consola
                 Console.WriteLine("Ingresa precio del producto");
                 producto.Precio = decimal.Parse(Console.ReadLine());
                 Console.WriteLine("Ingresa IdDepartamento");
-                producto.IdDepartamento = int.Parse(Console.ReadLine());
+                producto.Departamento = new ML.Departamento();
+                producto.Departamento.IdDepartamento = int.Parse(Console.ReadLine());
                 Console.WriteLine("Ingresa IdProveedor");
-                producto.IdProveedor = int.Parse(Console.ReadLine());
+                producto.Proveedor = new ML.Proveedor();
+                producto.Proveedor.IdProveedor = int.Parse(Console.ReadLine());
 
                 producto.Image = "No disponible";
 
@@ -101,7 +105,7 @@ namespace PL_Consola
             {
                 foreach (ML.Producto producto in result.Objects)
                 {
-                    Console.WriteLine("IdProducto: " + producto.IdProducto + " Nombre:" + producto.Nombre + " Descripcion: "+producto.Descripcion+ " Precio: "+producto.Precio+ " Departamento: "+producto.Departamento+ " Proveedor:"+producto.Proveedor+ " Image: "+producto.Image);
+                    Console.WriteLine("IdProducto: " + producto.IdProducto + " Nombre:" + producto.Nombre + " Descripcion: "+producto.Descripcion+ " Precio: "+producto.Precio+ " Departamento: "+producto.Departamento.Nombre+ " Proveedor:"+producto.Proveedor.Nombre+ " Image: "+producto.Image);
                 }
             }
             else
