@@ -1,3 +1,5 @@
+C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
 C:\Users\julio\source\repos\CrudD\BL\bin\Debug\BL.dll.config
 C:\Users\julio\source\repos\CrudD\BL\bin\Debug\BL.dll
 C:\Users\julio\source\repos\CrudD\BL\bin\Debug\BL.pdb
@@ -12,8 +14,6 @@ C:\Users\julio\source\repos\CrudD\BL\bin\Debug\EF.dll.config
 C:\Users\julio\source\repos\CrudD\BL\bin\Debug\ML.pdb
 C:\Users\julio\source\repos\CrudD\BL\bin\Debug\EntityFramework.xml
 C:\Users\julio\source\repos\CrudD\BL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.csprojAssemblyReference.cache
-C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
 C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.csproj.CopyComplete
 C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.dll
 C:\Users\julio\source\repos\CrudD\BL\obj\Debug\BL.pdb

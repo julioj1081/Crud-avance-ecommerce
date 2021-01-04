@@ -231,10 +231,10 @@ namespace PL_Consola
                         switch (opcion)
                         {
                             case 1:
-                                //PL_Consola.VentaProducto.Add();
+                                PL_Consola.VentaProducto.Add();
                                 break;
                             case 2:
-                                //PL_Consola.VentaProducto.GetAll();
+                                PL_Consola.VentaProducto.GetAll();
                                 break;
                         }
                         break;

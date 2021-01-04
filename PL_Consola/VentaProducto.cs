@@ -40,7 +40,7 @@ namespace PL_Consola
             {
                 foreach (ML.VentaProducto VentaProducto in result.Objects)
                 {
-                    Console.WriteLine("IdVentaProducto: " + VentaProducto.IdVentaProducto + " IdVenta:" + VentaProducto.Venta + " IdProductoSucursal: " + VentaProducto.ProductoSucursal + " Cantidad: " + VentaProducto.Cantidad + " Id Producto: " + VentaProducto.Producto);
+                    Console.WriteLine("IdVentaProducto: " + VentaProducto.IdVentaProducto + " IdVenta:" + VentaProducto.Venta.Cliente + " IdProductoSucursal: " + VentaProducto.Sucursal.Nombre + " Cantidad: " + VentaProducto.Cantidad + " Id Producto: " + VentaProducto.Producto.Nombre);
                 }
             }
             else

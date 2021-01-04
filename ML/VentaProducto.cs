@@ -15,6 +15,8 @@ namespace ML
         //public int IdProductoSucursal { get; set; }
         //public string ProductoSucursal { get; set; }
         public ML.ProductoSucursal ProductoSucursal { get; set; }
+        public ML.Sucursal Sucursal { get; set; }
+
         public int Cantidad { get; set; }
         //public int IdProducto { get; set; }
         //public string Producto { get; set; }

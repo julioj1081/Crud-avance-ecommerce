@@ -34,8 +34,8 @@
                 <td>@product.Nombre</td>
                 <td>@product.Descripcion</td>
                 <td>@product.Precio</td>
-                <td>@product.Departamento</td>
-                <td>@product.Proveedor</td>
+                <td>@product.Departamento.Nombre</td>
+                <td>@product.Proveedor.Nombre</td>
                 <td>@product.Image</td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto = product.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');" ;></a></td>
             </tr>

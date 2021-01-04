@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using EF;
+using DL_SQL_client;
 using ML;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using EF;
+
 namespace BL
 {
     public class Departamento
@@ -169,6 +171,51 @@ namespace BL
 
         }
 
+        public static ML.Result GetByDepartamento(int IdDepartamento)
+        {
+            Result result = new Result();
+            try
+            {
+                using(SqlConnection context = new SqlConnection(DL_SQL_client.Conexion.GetConnectionString()))
+                {
+                    string query = "Select [IdDepartamento], [NombreD], [IdArea] from JFernandezDepartamento WHERE IdDepartamento=" + IdDepartamento;
+                    using(SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = context;
+                        cmd.CommandText = query;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection.Open();
+                        DataTable departamentos = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(query, context);
+                        da.Fill(departamentos);
+                        if (departamentos.Rows.Count > 0)
+                        {
+                            DataRow row = departamentos.Rows[0];
+
+                            ML.Departamento depa = new ML.Departamento();
+                            depa.IdDepartamento = int.Parse(row[0].ToString());
+                            depa.Nombre = row[1].ToString();
+                            depa.Area = new ML.Area();
+                            depa.Area.Nombre = row[2].ToString();
+                            //
+                            result.Object = depa;
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                        }
+                        /////
+
+                    }
+                }
+            }catch(Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error " + e;
+            }
+            return result;
+        }
 
 
 
@@ -281,6 +328,7 @@ namespace BL
                         ML.Departamento depa = new ML.Departamento();
                         depa.IdDepartamento = result.IdDepartamento;
                         depa.Nombre = result.NombreD;
+                        depa.Area = new ML.Area();
                         depa.Area.IdArea = Convert.ToInt32(result.IdArea);
                         resultado.Object = depa;
                     }

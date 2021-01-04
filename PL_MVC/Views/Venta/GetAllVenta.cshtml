@@ -29,9 +29,9 @@
             <tr>
                 @*<td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Update", "Venta", new { Id = venta.IdVenta })"></a></td>*@
                 <td>@venta.IdVenta</td>
-                <td>@venta.Cliente</td>
+                <td>@venta.Cliente.Nombre</td>
                 <td>@venta.Total</td>
-                <td>@venta.MetodoPago</td>
+                <td>@venta.MetodoPago.Metodo</td>
                 <td>@venta.Fecha</td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Venta", new { IdVenta = venta.IdVenta})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');" ;></a></td>
             </tr>
