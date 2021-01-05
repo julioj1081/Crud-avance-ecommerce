@@ -18,8 +18,8 @@
                 <div class="form-group">
                     <div class="col-md-3">
                         <label>Id cliente</label>
-                        @Html.TextBoxFor(model => model.IdCliente, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.IdCliente)
+                        @Html.TextBoxFor(model => model.Cliente.IdCliente, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Cliente.IdCliente)
                     </div>
                 </div>
                 <div class="form-group">
@@ -31,9 +31,9 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        @Html.LabelFor(model => model.IdMetodoPago)
-                        @Html.TextBoxFor(model => model.IdMetodoPago, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.IdMetodoPago)
+                        @Html.LabelFor(model => model.MetodoPago.IdMetodoPago)
+                        @Html.TextBoxFor(model => model.MetodoPago.IdMetodoPago, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MetodoPago.IdMetodoPago)
                     </div>
                 </div>
                 <div class="form-group">

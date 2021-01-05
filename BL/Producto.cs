@@ -293,6 +293,7 @@ namespace BL
                         product.Precio = (decimal)result.Precio;
                         product.Departamento = new ML.Departamento();
                         product.Departamento.IdDepartamento = (int)result.IdDepartamento;
+                        product.Proveedor = new ML.Proveedor();
                         product.Proveedor.IdProveedor = (int)result.IdProveedor;
                         //falta la imagen
                         resultado.Object = product;

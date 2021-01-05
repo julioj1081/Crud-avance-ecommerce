@@ -121,9 +121,10 @@ namespace BL
                             ML.VentaProducto ventaProducto = new ML.VentaProducto();
                             ventaProducto.IdVentaProducto = item.IdVentaProducto;
                             ventaProducto.Venta = new ML.Venta();
-                            ventaProducto.Venta.Cliente.Nombre = item.JFernandezVenta.JFernandezCliente.NombreC;
+                            ventaProducto.Venta.IdVenta = item.JFernandezVenta.IdVenta;
                             ventaProducto.ProductoSucursal = new ML.ProductoSucursal();
-                            ventaProducto.ProductoSucursal.Producto.Nombre = item.JFernandezProductoSucursal.JFernandezSucursal.NombreS;
+                            ventaProducto.ProductoSucursal.IdProductoSucursal = item.JFernandezProductoSucursal.IdProductoSucursal;
+                            //ventaProducto.ProductoSucursal.Producto.Nombre = item.JFernandezProductoSucursal.JFernandezSucursal.NombreS;
                             ventaProducto.Cantidad = (int)item.Cantidad;
                             ventaProducto.Producto = new ML.Producto();
                             ventaProducto.Producto.Nombre = item.JFernandezProductos.Nombre;
