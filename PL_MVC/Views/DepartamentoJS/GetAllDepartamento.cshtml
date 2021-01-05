@@ -1,31 +1,69 @@
-﻿
+﻿<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 @{
     ViewBag.Title = "GetAllDepartamento";
 }
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
 
 <div class="container">
     <h2>Departamento usando js</h2>
-    <div style="float:right; margin: 1em;">
-        <button class="btn btn-success">Nuevo departamento</button>
+    <div style="float:right; margin-bottom: 1em;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Nuevo Departamento
+        </button>
     </div>
     <br />
     <table style="margin-top:1em;" class="table table-bordered table-hover table-responsive">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Nombre</td>
-                <td>Area</td>
-            </tr>
-        </thead>
-        <tbody class="tbody">
-        </tbody>
-    </table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre</td>
+                    <td>Area</td>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+            </tbody>
+        </table>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="IdDepartamento">ID</label>
+                            <input type="text" class="form-control" id="IdDepartamento" placeholder="Id" disabled="disabled" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input type="text" class="form-control" id="Nombre" placeholder="Nombre Departamento" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Area">Area</label>
+                            <input type="number" class="form-control" id="Area" placeholder="Id del area" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add();">Agregar Departamento</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Modificar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
+
+
+
+
+<script type="application/javascript">
     $(document).ready(function () {
         GetAllDepartamento();
     });
@@ -37,11 +75,12 @@
             dataType: "json",
             success: function (result) {
                 var html = '';
-                $.each(result, function (key, item) {
+                $.each(result.Objects, function (key, item) {
                     html += '<tr>';
                     html += '<td>' + item.IdDepartamento + '</td>';
                     html += '<td>' + item.Nombre + '</td>';
                     html += '<td>' + item.Area.Nombre + '</td>';
+                    html += '<td><button class="btn btn-warning" onclick="getbyID('+ item.IdDepartamento +')">Modificar</button> | <button class="btn btn-danger" onclick="getbyID('+ item.IdDepartamento +')">Eliminar</button></td>';
                     html += '</tr>';
                 });
                 $('.tbody').html(html);
@@ -49,7 +88,136 @@
             error: function (errormessage) {
                 alert(errormessage.responseText);
             }
-
         });
     }
+
+    function Add(){
+        var result = validate();
+        if(result == false){
+            return false;
+        }
+        var DepaObj = {
+            IdDepartamento : $('#IdDepartamento').val(),
+            Nombre: $('#Nombre').val(),
+            Area: {
+                "IdArea": $('#Area').val()
+            }
+        };
+        //alert(DepaObj.Nombre + "" +DepaObj.Area)
+        $.ajax({
+            url: "https://localhost:44387/api/Departamento",
+            data: JSON.stringify(DepaObj),
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function(result){
+                GetAllDepartamento();
+                 $("#modal-dialog").modal('hide');
+                 $('#btnUpdate').hide();
+            },
+            error: function(errormessage){
+                alert(errormessage.responseText);
+            }
+        });
+
+
+        //function para validar
+        function validate() {
+        var isValid = true;
+        if ($('#Nombre').val().trim() == "") {
+            $('#Nombre').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Nombre').css('border-color', 'lightgrey');
+        }
+        if ($('#Area').val().trim() == "") {
+            $('#Area').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Area').css('border-color', 'lightgrey');
+        }
+
+        return isValid;
+        }
+    }
+    //function de GetById
+     function getbyID(IdDepartamento){
+        //alert(IdDepartamento)
+        //$('#exampleModal').modal('show');
+            $('#Nombre').css('border-color', 'lightgrey');
+            $('#Area').css('border-color', 'lightgrey');
+            $.ajax({
+                url: "https://localhost:44387/api/Departamento/"+IdDepartamento,
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function(result){
+                    $('#IdDepartamento').val(result.Object.IdDepartamento);
+                    $('#Nombre').val(result.Object.Nombre);
+                    $('#Area').val(result.Object.Area.Nombre);
+                    $('#exampleModal').modal('show');
+                    $('#btnUpdate').show();
+                    $('#btnAdd').hide();
+                }
+            });
+         return false;
+     }
+
+    //Function de Modificar
+    function Update(){
+
+        var res = validate();
+        if(res == false){
+            return false;
+        }
+        var DepaObj = {
+            IdDepartamento : $('#IdDepartamento').val(),
+            Nombre: $('#Nombre').val(),
+            Area: {
+                "IdArea": $('#Area').val()
+            }
+        };
+        alert(JSON.stringify(DepaObj));
+        $.ajax({
+        url: "https://localhost:44387/api/Departamento/"+DepaObj.IdDepartamento,
+        data: JSON.stringify(DepaObj),
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            GetAllDepartamento();
+            $('#exampleModal').modal('hide');
+            $('#IdDepartamento').val("");
+            $('#Nombre').val("");
+            $('#Area').val("");
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+        });
+
+        //function para validar
+        function validate() {
+        var isValid = true;
+        if ($('#Nombre').val().trim() == "") {
+            $('#Nombre').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Nombre').css('border-color', 'lightgrey');
+        }
+        if ($('#Area').val().trim() == "") {
+            $('#Area').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Area').css('border-color', 'lightgrey');
+        }
+
+        return isValid;
+        }
+    }
+
 </script>

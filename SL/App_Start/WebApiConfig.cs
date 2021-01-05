@@ -11,9 +11,7 @@ namespace SL
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web
-            //config.EnableCors();
-            var corsAttr = new EnableCorsAttribute("*", "*", "*"); //accept all origins, headers, and methods
-            config.EnableCors(corsAttr);
+           
             // Rutas de API web
             config.MapHttpAttributeRoutes();
 
@@ -23,5 +21,6 @@ namespace SL
                 defaults: new { id = RouteParameter.Optional }
             );
         }
+        
     }
 }

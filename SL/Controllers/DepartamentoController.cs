@@ -7,10 +7,10 @@ using System.Web.Http;
 
 using ML;
 using BL;
-using System.Web.Http.Cors;
+//using System.Web.Http.Cors;
 namespace SL.Controllers
 {
-    [EnableCors(origins: "https://localhost:44387/api/Departamento", headers: "*", methods: "*")]
+    //[EnableCors(origins: "https://localhost:44387/api/Departamento", headers: "*", methods: "*")]
     public class DepartamentoController : ApiController
     {
         // GET: api/Departamento
@@ -19,11 +19,11 @@ namespace SL.Controllers
         public IHttpActionResult GetAll()
         {
             ML.Result result = BL.Departamento.GetAllDepartamento();
-            var res = result.Objects;
+            
             if (result.Correct)
             {
                 //return Ok(result);
-                return Ok(res);
+                return Ok(result);
             }
             else
             {
@@ -36,6 +36,7 @@ namespace SL.Controllers
         [Route("api/Departamento/{IdDepartamento}")]
         public IHttpActionResult GetById(int IdDepartamento)
         {
+            //ML.Result result = BL.Departamento.GetByDepartamento(IdDepartamento);
             ML.Result result = BL.Departamento.GetByDepartamento(IdDepartamento);
             if (result.Correct)
             {
@@ -50,7 +51,7 @@ namespace SL.Controllers
         // POST: api/Departamento
         [HttpPost]
         [Route("api/Departamento")]
-        public IHttpActionResult Create([FromBody]ML.Departamento departamento)
+        public IHttpActionResult Add([FromBody]ML.Departamento departamento)
         {
             ML.Result result = BL.Departamento.AddDepartamento(departamento);
             if (result.Correct)
@@ -64,7 +65,7 @@ namespace SL.Controllers
         }
 
         // PUT: api/Departamento/5
-        [HttpPut]
+        [HttpPost]
         [Route("api/Departamento/{IdDepartamento}")]
         public IHttpActionResult Update(int IdDepartamento, [FromBody]ML.Departamento departamento)
         {
