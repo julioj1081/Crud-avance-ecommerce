@@ -65,7 +65,7 @@ namespace SL.Controllers
         }
 
         // PUT: api/Departamento/5
-        [HttpPost]
+        [HttpPut]
         [Route("api/Departamento/{IdDepartamento}")]
         public IHttpActionResult Update(int IdDepartamento, [FromBody]ML.Departamento departamento)
         {
@@ -87,9 +87,9 @@ namespace SL.Controllers
         public IHttpActionResult Delete(int IdDepartamento)
         {
             //, [FromBody]ML.Departamento departamento
-            ML.Departamento departamento = new ML.Departamento();
-            departamento.IdDepartamento = IdDepartamento;
-            ML.Result result = BL.Departamento.DeleteDepartamento(departamento);
+            //ML.Departamento departamento = new ML.Departamento();
+            //departamento.IdDepartamento = IdDepartamento;
+            ML.Result result = BL.Departamento.DeleteDepartamento(IdDepartamento);
             if (result.Correct)
             {
                 return Ok(result);

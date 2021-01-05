@@ -49,8 +49,8 @@ namespace BL
             }
             return result;
         }
-
-        public static ML.Result DeleteDepartamento(ML.Departamento departamento)
+        //ML.Departamento 
+        public static ML.Result DeleteDepartamento(int departamento)
         {
             ML.Result result = new ML.Result();
             try
@@ -62,7 +62,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "DeleteDepartamento";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IdDepartamento", departamento.IdDepartamento);
+                        cmd.Parameters.AddWithValue("@IdDepartamento", departamento);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
                         {

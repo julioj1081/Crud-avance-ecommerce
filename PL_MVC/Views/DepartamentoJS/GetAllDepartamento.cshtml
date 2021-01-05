@@ -19,6 +19,7 @@
                     <td>ID</td>
                     <td>Nombre</td>
                     <td>Area</td>
+                    <td>Operaciones</td>
                 </tr>
             </thead>
             <tbody class="tbody">
@@ -41,11 +42,11 @@
                             <input type="text" class="form-control" id="IdDepartamento" placeholder="Id" disabled="disabled" />
                         </div>
                         <div class="form-group">
-                            <label for="Name">Name</label>
+                            <label for="Name">Nombre del departamento</label>
                             <input type="text" class="form-control" id="Nombre" placeholder="Nombre Departamento" />
                         </div>
                         <div class="form-group">
-                            <label for="Area">Area</label>
+                            <label for="Area">Area ID</label>
                             <input type="number" class="form-control" id="Area" placeholder="Id del area" />
                         </div>
                     </form>
@@ -80,7 +81,7 @@
                     html += '<td>' + item.IdDepartamento + '</td>';
                     html += '<td>' + item.Nombre + '</td>';
                     html += '<td>' + item.Area.Nombre + '</td>';
-                    html += '<td><button class="btn btn-warning" onclick="getbyID('+ item.IdDepartamento +')">Modificar</button> | <button class="btn btn-danger" onclick="getbyID('+ item.IdDepartamento +')">Eliminar</button></td>';
+                    html += '<td><button class="btn btn-warning" onclick="getbyID('+ item.IdDepartamento +')">Modificar</button> | <button class="btn btn-danger" onclick="Delete('+ item.IdDepartamento +')">Eliminar</button></td>';
                     html += '</tr>';
                 });
                 $('.tbody').html(html);
@@ -112,7 +113,7 @@
             dataType: "json",
             success: function(result){
                 GetAllDepartamento();
-                 $("#modal-dialog").modal('hide');
+                 $('#exampleModal').modal('hide');
                  $('#btnUpdate').hide();
             },
             error: function(errormessage){
@@ -179,11 +180,11 @@
                 "IdArea": $('#Area').val()
             }
         };
-        alert(JSON.stringify(DepaObj));
+        //alert(JSON.stringify(DepaObj));
         $.ajax({
         url: "https://localhost:44387/api/Departamento/"+DepaObj.IdDepartamento,
         data: JSON.stringify(DepaObj),
-        type: "POST",
+        type: "PUT",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
@@ -220,4 +221,23 @@
         }
     }
 
+    //function para Eliminar
+    function Delete(IdDepartamento) {
+    //alert(IdDepartamento)
+        var ans = confirm("Estas seguro de eliminar este registro?");
+        if (ans) {
+            $.ajax({
+                url: "https://localhost:44387/api/Departamento/" + IdDepartamento,
+                type: "DELETE",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    GetAllDepartamento();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+         });
+        }
+    }
 </script>
