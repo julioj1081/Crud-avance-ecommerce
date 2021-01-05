@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "GetAllDepartamento";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<div class="container">
+    <h2>Departamento usando js</h2>
+    <div style="float:right; margin: 1em;">
+        <button class="btn btn-success">Nuevo departamento</button>
+    </div>
+    <br />
+    <table style="margin-top:1em;" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Area</td>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        GetAllDepartamento();
+    });
+    function GetAllDepartamento() {
+        $.ajax({
+            url: "https://localhost:44387/api/Departamento",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                $.each(result, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.IdDepartamento + '</td>';
+                    html += '<td>' + item.Nombre + '</td>';
+                    html += '<td>' + item.Area.Nombre + '</td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+
+        });
+    }
+</script>

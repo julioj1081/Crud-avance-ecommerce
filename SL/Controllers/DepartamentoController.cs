@@ -7,8 +7,10 @@ using System.Web.Http;
 
 using ML;
 using BL;
+using System.Web.Http.Cors;
 namespace SL.Controllers
 {
+    [EnableCors(origins: "https://localhost:44387/api/Departamento", headers: "*", methods: "*")]
     public class DepartamentoController : ApiController
     {
         // GET: api/Departamento
@@ -17,9 +19,11 @@ namespace SL.Controllers
         public IHttpActionResult GetAll()
         {
             ML.Result result = BL.Departamento.GetAllDepartamento();
+            var res = result.Objects;
             if (result.Correct)
             {
-                return Ok(result);
+                //return Ok(result);
+                return Ok(res);
             }
             else
             {
@@ -79,8 +83,10 @@ namespace SL.Controllers
         // DELETE: api/Departamento/5
         [HttpDelete]
         [Route("api/Departamento/{IdDepartamento}")]
-        public IHttpActionResult Delete(int IdDepartamento, [FromBody]ML.Departamento departamento)
+        public IHttpActionResult Delete(int IdDepartamento)
         {
+            //, [FromBody]ML.Departamento departamento
+            ML.Departamento departamento = new ML.Departamento();
             departamento.IdDepartamento = IdDepartamento;
             ML.Result result = BL.Departamento.DeleteDepartamento(departamento);
             if (result.Correct)

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\DepartamentoJSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
@@ -192,6 +193,7 @@
     <Content Include="Views\VentaProducto\GetAllVentaProducto.cshtml" />
     <Content Include="Views\VentaProducto\Add.cshtml" />
     <Content Include="Views\VentaProducto\validacion.cshtml" />
+    <Content Include="Views\DepartamentoJS\GetAllDepartamento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
