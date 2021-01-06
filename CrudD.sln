@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DL_SQL-client", "DL_SQL-cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SL", "SL\SL.csproj", "{C188270C-1FFD-4679-83B5-925DF140DE47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SL_WCF", "SL_WCF\SL_WCF.csproj", "{AA5239A2-02CC-4015-ABED-3DBE95C41892}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C188270C-1FFD-4679-83B5-925DF140DE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C188270C-1FFD-4679-83B5-925DF140DE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C188270C-1FFD-4679-83B5-925DF140DE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA5239A2-02CC-4015-ABED-3DBE95C41892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA5239A2-02CC-4015-ABED-3DBE95C41892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA5239A2-02CC-4015-ABED-3DBE95C41892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA5239A2-02CC-4015-ABED-3DBE95C41892}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
