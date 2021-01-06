@@ -17,11 +17,13 @@ namespace PL_Consola
             departamento.Area = new ML.Area();
             departamento.Area.IdArea = int.Parse(Console.ReadLine());
             //Se va al BL
-            ML.Result result = BL.Departamento.AddDepartamento(departamento);
+            //ML.Result result = BL.Departamento.AddDepartamento(departamento);
+            ServiceReferenceAddDepartamento.DepartamentoClient servicio = new ServiceReferenceAddDepartamento.DepartamentoClient();
+            var result = servicio.AddDepartamento(departamento);
 
             if (result.Correct)
             {
-                Console.WriteLine("Departamento Insertado correctamente");
+                Console.WriteLine("Departamento Insertado correctamente WCF");
             }
             else
             {
@@ -32,9 +34,10 @@ namespace PL_Consola
 
         public static void Delete()
         {
-            ML.Departamento departamento = new ML.Departamento();
+            //ML.Departamento departamento = new ML.Departamento();
             Console.WriteLine("Ingresa el id del departamento");
-            departamento.IdDepartamento = int.Parse(Console.ReadLine());
+            //departamento.IdDepartamento = int.Parse(Console.ReadLine());
+            int departamento = int.Parse(Console.ReadLine());
             ML.Result result = BL.Departamento.DeleteDepartamento(departamento);
             if (result.Correct)
             {

@@ -26,7 +26,6 @@ C:\Users\julio\source\repos\CrudD\PL_Consola\bin\Debug\EF.dll.config
 C:\Users\julio\source\repos\CrudD\PL_Consola\bin\Debug\DL_SQL-client.pdb
 C:\Users\julio\source\repos\CrudD\PL_Consola\bin\Debug\es\System.Net.Http.Formatting.resources.dll
 C:\Users\julio\source\repos\CrudD\PL_Consola\bin\Debug\es\System.Web.Http.resources.dll
-C:\Users\julio\source\repos\CrudD\PL_Consola\obj\Debug\PL_Consola.csprojAssemblyReference.cache
 C:\Users\julio\source\repos\CrudD\PL_Consola\obj\Debug\PL_Consola.csproj.CoreCompileInputs.cache
 C:\Users\julio\source\repos\CrudD\PL_Consola\obj\Debug\PL_Consola.csproj.CopyComplete
 C:\Users\julio\source\repos\CrudD\PL_Consola\obj\Debug\PL_Consola.exe

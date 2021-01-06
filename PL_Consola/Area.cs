@@ -16,6 +16,7 @@ namespace PL_Consola
             area.Nombre = Console.ReadLine();
             //Se va a BL
             ML.Result result = BL.Area.AddArea(area);
+            
             if (result.Correct)
             {
                 Console.WriteLine("Area insertado correctamente");

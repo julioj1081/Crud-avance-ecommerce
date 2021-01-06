@@ -10,6 +10,12 @@ namespace PL_Consola
     {
         static void Main(string[] args)
         {
+            //ServiceReferenceSaludo.Service1Client saludo = new ServiceReferenceSaludo.Service1Client();
+            //var res = saludo.Saludo("Julio");
+
+            Console.WriteLine("");
+
+
             try
             {
                 Console.WriteLine("1 Area");
@@ -242,7 +248,7 @@ namespace PL_Consola
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
