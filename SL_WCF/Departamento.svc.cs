@@ -37,10 +37,10 @@ namespace SL_WCF
             return new Result { Correct = result.Correct, ErrorMessage = result.ErrorMessage, Ex = result.Ex };
         }
 
-        public Result GetAllDepartamento()
-        {
-            ML.Result result = BL.Departamento.GetAllDepartamento();
-            return new Result { Correct = result.Correct, ErrorMessage = result.ErrorMessage, Ex = result.Ex, Objects = result.Objects};
-        }
+        //public Result GetAllDepartamento()
+        //{
+        //    ML.Result result = BL.Departamento.GetAllDepartamento();
+        //    return new Result { Correct = result.Correct, ErrorMessage = result.ErrorMessage, Ex = result.Ex, Objects = result.Objects};
+        //}
     }
 }

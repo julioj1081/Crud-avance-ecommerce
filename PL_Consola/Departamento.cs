@@ -88,9 +88,9 @@ namespace PL_Consola
         public static void GetAll()
         {
             Console.WriteLine("Tabla Departamento");
-            //ML.Result result = BL.Departamento.GetAllDepartamento();
-            ServiceReferenceDepartamento.DepartamentoClient server = new ServiceReferenceDepartamento.DepartamentoClient();
-            var result = server.GetAllDepartamento();
+            ML.Result result = BL.Departamento.GetAllDepartamento();
+            //ServiceReferenceDepartamento.DepartamentoClient server = new ServiceReferenceDepartamento.DepartamentoClient();
+            //var result = server.GetAllDepartamento();
             if (result.Correct)
             {
                 foreach (ML.Departamento departamento in result.Objects)

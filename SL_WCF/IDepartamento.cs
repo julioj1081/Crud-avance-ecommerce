@@ -20,8 +20,8 @@ namespace SL_WCF
         [OperationContract]
         Result UpdateDepartamento(ML.Departamento departamento);
 
-        [OperationContract]
-        Result GetAllDepartamento();
+        //[OperationContract]
+        //Result GetAllDepartamento();
     }
 
 
