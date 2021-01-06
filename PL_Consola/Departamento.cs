@@ -18,12 +18,12 @@ namespace PL_Consola
             departamento.Area.IdArea = int.Parse(Console.ReadLine());
             //Se va al BL
             //ML.Result result = BL.Departamento.AddDepartamento(departamento);
-            ServiceReferenceAddDepartamento.DepartamentoClient servicio = new ServiceReferenceAddDepartamento.DepartamentoClient();
+            ServiceReferenceDepartamento.DepartamentoClient servicio = new ServiceReferenceDepartamento.DepartamentoClient();
             var result = servicio.AddDepartamento(departamento);
 
             if (result.Correct)
             {
-                Console.WriteLine("Departamento Insertado correctamente WCF");
+                Console.WriteLine("Departamento Insertado correctamente con WCF");
             }
             else
             {
@@ -38,14 +38,16 @@ namespace PL_Consola
             Console.WriteLine("Ingresa el id del departamento");
             //departamento.IdDepartamento = int.Parse(Console.ReadLine());
             int departamento = int.Parse(Console.ReadLine());
-            ML.Result result = BL.Departamento.DeleteDepartamento(departamento);
-            if (result.Correct)
+            //ML.Result result = BL.Departamento.DeleteDepartamento(departamento);
+            ServiceReferenceDepartamento.DepartamentoClient servicio = new ServiceReferenceDepartamento.DepartamentoClient();
+            var result2 = servicio.DeleteDepartamento(departamento);
+            if (result2.Correct)
             {
-                Console.WriteLine("Departamento eliminado correctamente");
+                Console.WriteLine("Departamento eliminado correctamente con WCF");
             }
             else
             {
-                Console.WriteLine(result.ErrorMessage);
+                Console.WriteLine(result2.ErrorMessage);
             }
         }
 
@@ -64,10 +66,12 @@ namespace PL_Consola
                 departamento.Area = new ML.Area();
                 departamento.Area.IdArea = int.Parse(Console.ReadLine());
                 //Se va al BL
-                ML.Result res = BL.Departamento.UpdateDepartamento(departamento);
+                //ML.Result res = BL.Departamento.UpdateDepartamento(departamento);
+                ServiceReferenceDepartamento.DepartamentoClient server = new ServiceReferenceDepartamento.DepartamentoClient();
+                var res = server.UpdateDepartamento(departamento);
                 if (res.Correct)
                 {
-                    Console.WriteLine("Departamento modificado");
+                    Console.WriteLine("Departamento modificado con WCF");
                 }
                 else
                 {
@@ -84,7 +88,9 @@ namespace PL_Consola
         public static void GetAll()
         {
             Console.WriteLine("Tabla Departamento");
-            ML.Result result = BL.Departamento.GetAllDepartamento();
+            //ML.Result result = BL.Departamento.GetAllDepartamento();
+            ServiceReferenceDepartamento.DepartamentoClient server = new ServiceReferenceDepartamento.DepartamentoClient();
+            var result = server.GetAllDepartamento();
             if (result.Correct)
             {
                 foreach (ML.Departamento departamento in result.Objects)

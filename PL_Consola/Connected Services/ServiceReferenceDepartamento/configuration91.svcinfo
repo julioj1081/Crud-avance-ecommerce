@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="xTItivsant58eD4upxQ4B9f2/wFBntUOFebadyqlu/M=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3D8tkwCBHIq4OC24+u5A4NF4akXSMy/sCGg9pNEGOA8=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IDepartamento">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IDepartamento" contract="ServiceReferenceAddDepartamento.IDepartamento" bindingType="basicHttpBinding" address="http://localhost:55929/Departamento.svc" bindingConfiguration="BasicHttpBinding_IDepartamento">
+    <endpoint name="BasicHttpBinding_IDepartamento" contract="ServiceReferenceDepartamento.IDepartamento" bindingType="basicHttpBinding" address="http://localhost:55929/Departamento.svc" bindingConfiguration="BasicHttpBinding_IDepartamento">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:55929/Departamento.svc</serializedValue>
@@ -127,7 +127,7 @@
           <serializedValue>BasicHttpBinding_IDepartamento</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>ServiceReferenceAddDepartamento.IDepartamento</serializedValue>
+          <serializedValue>ServiceReferenceDepartamento.IDepartamento</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

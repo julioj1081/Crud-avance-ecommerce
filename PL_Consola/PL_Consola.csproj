@@ -87,7 +87,12 @@
   <ItemGroup>
     <Compile Include="Area.cs" />
     <Compile Include="Cliente.cs" />
-    <Compile Include="Connected Services\ServiceReferenceAddDepartamento\Reference.cs">
+    <Compile Include="Connected Services\ServiceReferenceDepartamento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferenceProducto\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -110,24 +115,43 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento.wsdl" />
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento.xsd">
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento.wsdl" />
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento1.xsd">
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento2.xsd">
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento3.xsd">
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento4.xsd">
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\PL_Consola.ServiceReferenceAddDepartamento.Result.datasource">
+    <None Include="Connected Services\ServiceReferenceDepartamento\PL_Consola.ServiceReferenceDepartamento.Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProducto\PL_Consola.ServiceReferenceProducto.Result2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProducto\Producto.wsdl" />
+    <None Include="Connected Services\ServiceReferenceProducto\Producto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProducto\Producto1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProducto\Producto2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProducto\Producto3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceProducto\Producto4.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferenceSaludo\PL_Consola.ServiceReferenceSaludo.Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -176,7 +200,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServiceReferenceAddDepartamento\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceDepartamento\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceProducto\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceSaludo\" />
   </ItemGroup>
   <ItemGroup>
@@ -195,16 +220,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Departamento.disco" />
+    <None Include="Connected Services\ServiceReferenceDepartamento\Departamento.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceDepartamento\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceDepartamento\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReferenceAddDepartamento\Reference.svcmap">
+    <None Include="Connected Services\ServiceReferenceDepartamento\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceProducto\Producto.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceProducto\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceProducto\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceProducto\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

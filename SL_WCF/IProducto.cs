@@ -7,27 +7,23 @@ using System.Text;
 
 namespace SL_WCF
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IDepartamento" en el código y en el archivo de configuración a la vez.
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IProducto" en el código y en el archivo de configuración a la vez.
     [ServiceContract]
-    public interface IDepartamento
+    public interface IProducto
     {
         [OperationContract]
-        Result AddDepartamento(ML.Departamento departamento);
+        Result2 AddProducto(ML.Producto producto);
 
         [OperationContract]
-        Result DeleteDepartamento(int departamento);
+        Result2 DeleteProducto(ML.Producto producto);
 
         [OperationContract]
-        Result UpdateDepartamento(ML.Departamento departamento);
-
-        [OperationContract]
-        Result GetAllDepartamento();
+        Result2 UpdateProducto(ML.Producto producto);
     }
-
 
     // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
     [DataContract]
-    public class Result
+    public class Result2
     {
         [DataMember]
         public bool Correct { get; set; }

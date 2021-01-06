@@ -28,10 +28,12 @@ namespace PL_Consola
             producto.Image = "No disponible";
 
             //Se va a BL
-            ML.Result result = BL.Producto.AddProducto(producto);
+            //ML.Result result = BL.Producto.AddProducto(producto);
+            ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
+            var result = server.AddProducto(producto);
             if (result.Correct)
             {
-                Console.WriteLine("Producto insertado correctamente");
+                Console.WriteLine("Producto insertado correctamente con WCF");
             }
             else
             {
@@ -44,10 +46,13 @@ namespace PL_Consola
             ML.Producto producto = new ML.Producto();
             Console.WriteLine("Ingresa el id del producto");
             producto.IdProducto = int.Parse(Console.ReadLine());
-            ML.Result result = BL.Producto.DeleteProducto(producto);
+            //Se va a BL
+            //ML.Result result = BL.Producto.DeleteProducto(producto);
+            ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
+            var result = server.DeleteProducto(producto);
             if (result.Correct)
             {
-                Console.WriteLine("Producto eliminado correctamente");
+                Console.WriteLine("Producto eliminado correctamente con WCF");
             }
             else
             {
@@ -80,7 +85,9 @@ namespace PL_Consola
                 producto.Image = "No disponible";
 
                 //Se va a BL
-                ML.Result res = BL.Producto.UpdateProducto(producto);
+                //ML.Result res = BL.Producto.UpdateProducto(producto);
+                ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
+                var res = server.UpdateProducto(producto);
                 if (res.Correct)
                 {
                     Console.WriteLine("Producto modificado correctamente");

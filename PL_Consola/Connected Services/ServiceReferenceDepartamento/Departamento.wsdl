@@ -15,16 +15,73 @@
   <wsdl:message name="IDepartamento_AddDepartamento_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddDepartamentoResponse" />
   </wsdl:message>
+  <wsdl:message name="IDepartamento_DeleteDepartamento_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDepartamento" />
+  </wsdl:message>
+  <wsdl:message name="IDepartamento_DeleteDepartamento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDepartamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDepartamento_UpdateDepartamento_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDepartamento" />
+  </wsdl:message>
+  <wsdl:message name="IDepartamento_UpdateDepartamento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDepartamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDepartamento_GetAllDepartamento_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDepartamento" />
+  </wsdl:message>
+  <wsdl:message name="IDepartamento_GetAllDepartamento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDepartamentoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDepartamento">
     <wsdl:operation name="AddDepartamento">
       <wsdl:input wsaw:Action="http://tempuri.org/IDepartamento/AddDepartamento" message="tns:IDepartamento_AddDepartamento_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDepartamento/AddDepartamentoResponse" message="tns:IDepartamento_AddDepartamento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDepartamento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDepartamento/DeleteDepartamento" message="tns:IDepartamento_DeleteDepartamento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDepartamento/DeleteDepartamentoResponse" message="tns:IDepartamento_DeleteDepartamento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartamento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDepartamento/UpdateDepartamento" message="tns:IDepartamento_UpdateDepartamento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDepartamento/UpdateDepartamentoResponse" message="tns:IDepartamento_UpdateDepartamento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDepartamento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDepartamento/GetAllDepartamento" message="tns:IDepartamento_GetAllDepartamento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDepartamento/GetAllDepartamentoResponse" message="tns:IDepartamento_GetAllDepartamento_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDepartamento" type="tns:IDepartamento">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AddDepartamento">
       <soap:operation soapAction="http://tempuri.org/IDepartamento/AddDepartamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDepartamento">
+      <soap:operation soapAction="http://tempuri.org/IDepartamento/DeleteDepartamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartamento">
+      <soap:operation soapAction="http://tempuri.org/IDepartamento/UpdateDepartamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDepartamento">
+      <soap:operation soapAction="http://tempuri.org/IDepartamento/GetAllDepartamento" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

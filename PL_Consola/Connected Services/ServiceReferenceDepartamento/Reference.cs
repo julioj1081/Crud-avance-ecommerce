@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PL_Consola.ServiceReferenceAddDepartamento {
+namespace PL_Consola.ServiceReferenceDepartamento {
     using System.Runtime.Serialization;
     using System;
     
@@ -110,26 +110,47 @@ namespace PL_Consola.ServiceReferenceAddDepartamento {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceAddDepartamento.IDepartamento")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceDepartamento.IDepartamento")]
     public interface IDepartamento {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/AddDepartamento", ReplyAction="http://tempuri.org/IDepartamento/AddDepartamentoResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PL_Consola.ServiceReferenceAddDepartamento.Result))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PL_Consola.ServiceReferenceDepartamento.Result))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Area))]
-        PL_Consola.ServiceReferenceAddDepartamento.Result AddDepartamento(ML.Departamento departamento);
+        PL_Consola.ServiceReferenceDepartamento.Result AddDepartamento(ML.Departamento departamento);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/AddDepartamento", ReplyAction="http://tempuri.org/IDepartamento/AddDepartamentoResponse")]
-        System.Threading.Tasks.Task<PL_Consola.ServiceReferenceAddDepartamento.Result> AddDepartamentoAsync(ML.Departamento departamento);
+        System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> AddDepartamentoAsync(ML.Departamento departamento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/DeleteDepartamento", ReplyAction="http://tempuri.org/IDepartamento/DeleteDepartamentoResponse")]
+        PL_Consola.ServiceReferenceDepartamento.Result DeleteDepartamento(int departamento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/DeleteDepartamento", ReplyAction="http://tempuri.org/IDepartamento/DeleteDepartamentoResponse")]
+        System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> DeleteDepartamentoAsync(int departamento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/UpdateDepartamento", ReplyAction="http://tempuri.org/IDepartamento/UpdateDepartamentoResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PL_Consola.ServiceReferenceDepartamento.Result))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Area))]
+        PL_Consola.ServiceReferenceDepartamento.Result UpdateDepartamento(ML.Departamento departamento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/UpdateDepartamento", ReplyAction="http://tempuri.org/IDepartamento/UpdateDepartamentoResponse")]
+        System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> UpdateDepartamentoAsync(ML.Departamento departamento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/GetAllDepartamento", ReplyAction="http://tempuri.org/IDepartamento/GetAllDepartamentoResponse")]
+        PL_Consola.ServiceReferenceDepartamento.Result GetAllDepartamento();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDepartamento/GetAllDepartamento", ReplyAction="http://tempuri.org/IDepartamento/GetAllDepartamentoResponse")]
+        System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> GetAllDepartamentoAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDepartamentoChannel : PL_Consola.ServiceReferenceAddDepartamento.IDepartamento, System.ServiceModel.IClientChannel {
+    public interface IDepartamentoChannel : PL_Consola.ServiceReferenceDepartamento.IDepartamento, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DepartamentoClient : System.ServiceModel.ClientBase<PL_Consola.ServiceReferenceAddDepartamento.IDepartamento>, PL_Consola.ServiceReferenceAddDepartamento.IDepartamento {
+    public partial class DepartamentoClient : System.ServiceModel.ClientBase<PL_Consola.ServiceReferenceDepartamento.IDepartamento>, PL_Consola.ServiceReferenceDepartamento.IDepartamento {
         
         public DepartamentoClient() {
         }
@@ -150,12 +171,36 @@ namespace PL_Consola.ServiceReferenceAddDepartamento {
                 base(binding, remoteAddress) {
         }
         
-        public PL_Consola.ServiceReferenceAddDepartamento.Result AddDepartamento(ML.Departamento departamento) {
+        public PL_Consola.ServiceReferenceDepartamento.Result AddDepartamento(ML.Departamento departamento) {
             return base.Channel.AddDepartamento(departamento);
         }
         
-        public System.Threading.Tasks.Task<PL_Consola.ServiceReferenceAddDepartamento.Result> AddDepartamentoAsync(ML.Departamento departamento) {
+        public System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> AddDepartamentoAsync(ML.Departamento departamento) {
             return base.Channel.AddDepartamentoAsync(departamento);
+        }
+        
+        public PL_Consola.ServiceReferenceDepartamento.Result DeleteDepartamento(int departamento) {
+            return base.Channel.DeleteDepartamento(departamento);
+        }
+        
+        public System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> DeleteDepartamentoAsync(int departamento) {
+            return base.Channel.DeleteDepartamentoAsync(departamento);
+        }
+        
+        public PL_Consola.ServiceReferenceDepartamento.Result UpdateDepartamento(ML.Departamento departamento) {
+            return base.Channel.UpdateDepartamento(departamento);
+        }
+        
+        public System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> UpdateDepartamentoAsync(ML.Departamento departamento) {
+            return base.Channel.UpdateDepartamentoAsync(departamento);
+        }
+        
+        public PL_Consola.ServiceReferenceDepartamento.Result GetAllDepartamento() {
+            return base.Channel.GetAllDepartamento();
+        }
+        
+        public System.Threading.Tasks.Task<PL_Consola.ServiceReferenceDepartamento.Result> GetAllDepartamentoAsync() {
+            return base.Channel.GetAllDepartamentoAsync();
         }
     }
 }
