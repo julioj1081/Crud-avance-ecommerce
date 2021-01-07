@@ -194,6 +194,8 @@
     <Content Include="Views\VentaProducto\Add.cshtml" />
     <Content Include="Views\VentaProducto\validacion.cshtml" />
     <Content Include="Views\DepartamentoJS\GetAllDepartamento.cshtml" />
+    <Content Include="Views\Departamento\Form.cshtml" />
+    <Content Include="Views\Producto\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -216,10 +218,6 @@
     <ProjectReference Include="..\BL\BL.csproj">
       <Project>{199e5f2a-6f2a-4b74-bcf6-dfba03f0444d}</Project>
       <Name>BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DL_SQL-client\DL_SQL-client.csproj">
-      <Project>{b730f8b0-7bbb-4722-8825-fbf0e6b590f9}</Project>
-      <Name>DL_SQL-client</Name>
     </ProjectReference>
     <ProjectReference Include="..\ML\ML.csproj">
       <Project>{abd93589-1159-4367-b47f-13edbe8efdf7}</Project>

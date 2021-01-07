@@ -1,0 +1,75 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Form";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Productos</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using(Html.BeginForm("Form", "Producto", FormMethod.Post))
+            {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdProducto)
+                        @Html.TextBoxFor(model => model.IdProducto, new { @class = "form-control hidden" })
+                        @Html.ValidationMessageFor(model => model.IdProducto)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Descripcion)
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Precio)
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Precio)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Departamento.IdDepartamento)
+                        @Html.TextBoxFor(model => model.Departamento.IdDepartamento, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Proveedor.IdProveedor)
+                        @Html.TextBoxFor(model => model.Proveedor.IdProveedor, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label>Imagen no disponible</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success"/>
+                        @Html.ActionLink("Regresar", "GetAllProducto", "Producto", htmlAttributes: new { @class="btn btn-danger"})
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

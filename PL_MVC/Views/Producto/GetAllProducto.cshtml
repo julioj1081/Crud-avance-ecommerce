@@ -3,12 +3,11 @@
     ViewBag.Title = "GetAllProducto";
 }
 
-<h2>GetAllProducto</h2>
-
+<h2>Productos</h2>
 <div class="container">
     <div class="row">
-        <div style="float:right; margin-bottom: 1rem;">
-            @Html.ActionLink("Agregar nuevo Producto", "Add", "Producto", htmlAttributes: new { @class="btn btn-success"})
+        <div style="float:right; margin: 1rem;">
+            @Html.ActionLink("+", "Form", "Producto", htmlAttributes: new { @class="btn btn-success"})
         </div>
     </div>
     <table class="table table-bordered table-hover table-responsive">
@@ -26,18 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(ML.Producto product in Model.Productos)
+            @foreach(ML.Producto producto in Model.Productos)
             {
             <tr>
-                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Update", "Producto", new { Id = product.IdProducto })"></a></td>
-                <td>@product.IdProducto</td>
-                <td>@product.Nombre</td>
-                <td>@product.Descripcion</td>
-                <td>@product.Precio</td>
-                <td>@product.Departamento.Nombre</td>
-                <td>@product.Proveedor.Nombre</td>
-                <td>@product.Image</td>
-                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto = product.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');" ;></a></td>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Producto", new { IdProducto = producto.IdProducto })"></a></td>
+                <td>@producto.IdProducto</td>
+                <td>@producto.Nombre</td>
+                <td>@producto.Descripcion</td>
+                <td>@producto.Precio</td>
+                <td>@producto.Departamento.Nombre</td>
+                <td>@producto.Proveedor.Nombre</td>
+                <td>@producto.Image</td>
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Producto", new { IdProducto = producto.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');" ;></a></td>
             </tr>
             }
         </tbody>

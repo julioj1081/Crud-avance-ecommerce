@@ -178,7 +178,57 @@ namespace BL
             return result;
         }
 
+        public static ML.Result GetByIdProducto(int IdProducto)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL_SQL_client.Conexion.GetConnectionString()))
+                {
+                    string query = "select * from JFernandezProductos WHERE IdProducto=" + IdProducto;
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = context;
+                        cmd.CommandText = query;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection.Open();
+                        DataTable productos = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(query, context);
+                        da.Fill(productos);
+                        if (productos.Rows.Count > 0)
+                        {
+                            DataRow row = productos.Rows[0];
+                            ML.Producto producto = new ML.Producto();
+                            producto.IdProducto = int.Parse(row[0].ToString());
+                            producto.Nombre = row[1].ToString();
+                            producto.Descripcion = row[2].ToString();
+                            producto.Precio = int.Parse(row[3].ToString());
 
+                            producto.Departamento = new ML.Departamento();
+                            producto.Departamento.IdDepartamento = int.Parse(row[4].ToString());
+
+                            producto.Proveedor = new ML.Proveedor();
+                            producto.Proveedor.IdProveedor = int.Parse(row[5].ToString());
+                            //falta la imagen
+                            result.Object = producto;
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = "No se encontraron registros ";
+                        }
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido " + e;
+            }
+            return result;
+        }
 
         //Con ENTITY
         public static ML.Result GetAllEF()
