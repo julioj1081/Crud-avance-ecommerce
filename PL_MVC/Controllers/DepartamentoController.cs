@@ -9,7 +9,7 @@ namespace PL_MVC.Controllers
 {
     public class DepartamentoController : Controller
     {
-        // GET: Departamento
+        // GET: Departamento agregar drop en area
         public ActionResult GetAllDepartamento()
         {
             ML.Result result = BL.Departamento.GetAllEF();

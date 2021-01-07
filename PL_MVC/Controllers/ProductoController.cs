@@ -9,7 +9,7 @@ namespace PL_MVC.Controllers
 {
     public class ProductoController : Controller
     {
-        // GET: Producto
+        // GET: Producto agregar el dropdown en cascada area -> departamento y proveedor | 
         public ActionResult GetAllProducto()
         {
             ML.Result result = BL.Producto.GetAllEF();
