@@ -47,7 +47,9 @@
                         </div>
                         <div class="form-group">
                             <label for="Area">Area ID</label>
-                            <input type="number" class="form-control" id="Area" placeholder="Id del area" />
+                            @*<input type="number" class="form-control" id="Area" placeholder="Id del area" />*@
+                        <select id="Area" class="dropdown form-control">
+                        </select>
                         </div>
                     </form>
                 </div>
@@ -67,6 +69,7 @@
 <script type="application/javascript">
     $(document).ready(function () {
         GetAllDepartamento();
+        Dropdownlist();
     });
     function GetAllDepartamento() {
         $.ajax({
@@ -93,7 +96,6 @@
     }
 
     function Add(){
-
         var result = validate();
         if(result == false){
             return false;
@@ -245,6 +247,27 @@
          });
         }
     }
+
+    function Dropdownlist(){
+        //alert("hola");
+        var $dropdown = $(".dropdown");
+        $.ajax({
+            url: "https://localhost:44387/api/Area",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                 $.each(result.Objects, function (key, item) {
+                    $dropdown.append($("<option />").val(item.IdArea).text(item.Nombre));
+                    //console.log(item);
+                 });
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
 
     //Limpieza
     function limpiar() {

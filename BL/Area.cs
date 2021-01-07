@@ -150,5 +150,45 @@ namespace BL
             }
             return result;
         }
+    
+        public static ML.Result GetByIdArea(int IdArea)
+        {
+            Result result = new Result();
+            try
+            {
+                using (SqlConnection context = new SqlConnection(DL_SQL_client.Conexion.GetConnectionString()))
+                {
+                    string query = "SELECT [IdArea], [NombreA] FROM JFernandezArea WHERE IdArea = " + IdArea;
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = context;
+                        cmd.CommandText = query;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection.Open();
+                        DataTable areas = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(query, context);
+                        da.Fill(areas);
+                        if (areas.Rows.Count > 0)
+                        {
+                            DataRow row = areas.Rows[0];
+                            ML.Area area = new ML.Area();
+                            area.IdArea = int.Parse(row[0].ToString());
+                            area.Nombre = row[1].ToString();
+                            result.Object = area;
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                        }
+                    }
+                }
+            } catch (Exception e)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Error desconocido " + e;
+            }
+            return result;
+        }
     }
 }
