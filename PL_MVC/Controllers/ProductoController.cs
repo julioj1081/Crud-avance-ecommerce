@@ -13,7 +13,7 @@ namespace PL_MVC.Controllers
         [HttpGet]
         public ActionResult GetAllProducto()
         {
-            ML.Result result = BL.Producto.GetAllEF();
+            ML.Result result = BL.Producto.GetAllProducto();
             ML.Producto producto = new ML.Producto();
             producto.Productos = result.Objects;
 
@@ -62,7 +62,7 @@ namespace PL_MVC.Controllers
 
                     //producto.Proveedor = new ML.Proveedor();
                     producto.Proveedor.IdProveedor = ((ML.Producto)result.Object).Proveedor.IdProveedor;
-                    //product.Image = ((ML.Producto)result.Object).Image;
+                    //producto.Image = ((ML.Producto)result.Object).Image;
                     return View(producto);
                 }
                 else
@@ -125,7 +125,7 @@ namespace PL_MVC.Controllers
         public ActionResult Delete(ML.Producto producto)
         {
             producto.IdProducto = Convert.ToInt32(producto.IdProducto);
-            var result = BL.Producto.DeleteEF(producto);
+            var result = BL.Producto.DeleteProducto(producto);
             return RedirectToAction("GetAllProducto");
         }
 

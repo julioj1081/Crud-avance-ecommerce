@@ -195,6 +195,15 @@ Delete from JFernandezSucursal Where IdSucursal = @IdSucursal
 //
 DELIMITER ;
 
+-- Volcando estructura para procedimiento JFernandezEcommerce.DeleteVenta
+DELIMITER //
+create procedure DeleteVenta
+@IdVenta int
+as
+Delete from JFernandezVenta Where IdVenta = @IdVenta
+//
+DELIMITER ;
+
 -- Volcando estructura para función JFernandezEcommerce.fn_diagramobjects
 DELIMITER //
 
@@ -339,11 +348,44 @@ ON JFernandezVenta.IdMetodoPago = JFernandezMetodoPago.IdMetodoPago
 //
 DELIMITER ;
 
--- Volcando estructura para procedimiento JFernandezEcommerce.GetByIdEF
+-- Volcando estructura para procedimiento JFernandezEcommerce.GetAllVentaProducto
+DELIMITER //
+CREATE procedure [dbo].[GetAllVentaProducto]
+as
+SELECT IdVentaProducto, IdCliente, NombreS AS 'Nombre Sucursal', Cantidad, Nombre AS 'Nombre del producto'FROM JFernandezVentaProducto
+INNER JOIN JFernandezVenta
+ON JFernandezVentaProducto.IdVenta = JFernandezVenta.IdVenta 
+INNER JOIN JFernandezSucursal
+ON JFernandezVentaProducto.IdProductoSucursal = JFernandezSucursal.IdSucursal 
+Inner JOIN JFernandezProductos
+ON JFernandezVentaProducto.IdProducto = JFernandezProductos.IdProducto 
+
+//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento JFernandezEcommerce.GetByIdEF_Cliente
+DELIMITER //
+Create Procedure GetByIdEF_Cliente
+@IdCliente int
+as
+select * from JFernandezCliente WHERE IdCliente = @IdCliente
+//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento JFernandezEcommerce.GetByIdEF_Departamento
 DELIMITER //
 create procedure GetByIdEF
 @IdDepartamento int
 as select * from JFernandezDepartamento WHERE IdDepartamento = @IdDepartamento
+//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento JFernandezEcommerce.GetByIdEF_Producto
+DELIMITER //
+Create Procedure GetByIdEF_Producto
+@IdProducto int
+as
+select * from JFernandezProductos WHERE IdProducto = @IdProducto
 //
 DELIMITER ;
 
@@ -365,7 +407,8 @@ REPLACE INTO "JFernandezArea" ("IdArea", "NombreA") VALUES
 	(6, 'Hojar'),
 	(7, 'Decoracion'),
 	(8, 'Accesorios de autos'),
-	(1005, 'Devoluciones');
+	(1005, 'Devoluciones'),
+	(1007, 'Electronicos');
 /*!40000 ALTER TABLE "JFernandezArea" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezCliente
@@ -379,10 +422,9 @@ CREATE TABLE IF NOT EXISTS "JFernandezCliente" (
 -- Volcando datos para la tabla JFernandezEcommerce.JFernandezCliente: -1 rows
 /*!40000 ALTER TABLE "JFernandezCliente" DISABLE KEYS */;
 REPLACE INTO "JFernandezCliente" ("IdCliente", "NombreC", "Rfc") VALUES
-	(1, 'Cliente 1', '1'),
-	(2, 'Cliente 2', 'frc2'),
-	(3, 'Cliente 3', 'FRC 123'),
-	(4, 'Greg', 'fergreg');
+	(1, 'gabriel flores', 'rflsa123'),
+	(3, 'juanito', 'FRC 123'),
+	(5, 'alejandro', 'alefg');
 /*!40000 ALTER TABLE "JFernandezCliente" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezDepartamento
@@ -398,16 +440,21 @@ CREATE TABLE IF NOT EXISTS "JFernandezDepartamento" (
 -- Volcando datos para la tabla JFernandezEcommerce.JFernandezDepartamento: -1 rows
 /*!40000 ALTER TABLE "JFernandezDepartamento" DISABLE KEYS */;
 REPLACE INTO "JFernandezDepartamento" ("IdDepartamento", "NombreD", "IdArea") VALUES
-	(1, 'Departamento de comida', 1),
+	(1, 'Departamento de frutitas', 4),
 	(2, 'Departamento de muebles', 2),
 	(3, 'Departamento de Ferreteria', 3),
-	(4, 'Departamento de Papeleria', 4),
+	(4, 'Departamento de Papeleria', 7),
 	(5, 'Departamento de Jugueteria', 5),
 	(6, 'Departamento de Hogar', 6),
 	(7, 'Departamento de decoracion', 7),
 	(8, 'Departamento de herramientas', 8),
-	(14, 'depa mod', 1),
-	(15, 'despartamento 1', 2);
+	(14, 'departamento de frutas y verduras', 1),
+	(20, 'muebles rincon', 2),
+	(26, 'Departamento de WCF', 3),
+	(31, 'Departamento wcf', 3),
+	(32, 'Departamento WCF', 4),
+	(33, 'Departamento de ventas', 5),
+	(35, 'prueba limipeza', 7);
 /*!40000 ALTER TABLE "JFernandezDepartamento" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezMetodoPago
@@ -423,7 +470,8 @@ REPLACE INTO "JFernandezMetodoPago" ("IdMetodoPago", "Metodo") VALUES
 	(1, 'Pago credito'),
 	(2, 'Pago tarjeta'),
 	(3, 'Pago monetario'),
-	(4, 'paypal');
+	(4, 'paypal'),
+	(5, 'efectivo');
 /*!40000 ALTER TABLE "JFernandezMetodoPago" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezProductos
@@ -445,16 +493,16 @@ CREATE TABLE IF NOT EXISTS "JFernandezProductos" (
 -- Volcando datos para la tabla JFernandezEcommerce.JFernandezProductos: -1 rows
 /*!40000 ALTER TABLE "JFernandezProductos" DISABLE KEYS */;
 REPLACE INTO "JFernandezProductos" ("IdProducto", "Nombre", "Descripcion", "Precio", "IdDepartamento", "IdProveedor", "Image") VALUES
-	(1, 'Mango', 'Furta fresca', 10, 1, 1, NULL),
+	(1, 'Mango', 'Furta fresca', 10, 1, 1, _binary 0x368762B29A2789B95E),
 	(2, 'Manzana', 'fruta fresca', 6, 1, 1, NULL),
 	(3, 'Pescado', 'Pescado fresco', 45, 1, 2, NULL),
-	(4, 'Res', 'carne de res', 45, 1, 1, NULL),
+	(4, 'Carne de coyote', 'carne fresca', 123, 1, 1, _binary 0x368762B29A2789B95E),
 	(5, 'Nuez', 'especiea', 15, 1, 1, NULL),
 	(6, 'Pan de nuez', 'pan con nuez', 8, 1, 1, NULL),
-	(7, 'Tortillas tia rosa', 'Tortillas de arina', 24, 1, 2, NULL),
-	(8, 'Crema alpura', 'Cremas', 25, 1, 1, NULL),
-	(9, 'Yogurt Alpura', 'Lacteos y yogurt', 12, 1, 2, NULL),
-	(1002, 'yogurt lala', 'lacteos', 22, 1, 2, _binary 0x368762B29A2789B95E);
+	(7, 'Tortillas tia rosa', 'Tortillas de arina', 24, 1, 3, _binary 0x368762B29A2789B95E),
+	(8, 'Crema lala', 'Cremas', 25, 1, 1, _binary 0x368762B29A2789B95E),
+	(9, 'Yogurt Alpura', 'Lacteos y yogurt', 15, 1, 2, _binary 0x368762B29A2789B95E),
+	(1006, 'sopa maruchan', 'nissan', 12, 1, 5, _binary 0x368762B29A2789B95E);
 /*!40000 ALTER TABLE "JFernandezProductos" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezProductoSucursal
@@ -475,7 +523,8 @@ REPLACE INTO "JFernandezProductoSucursal" ("IdProductoSucursal", "IdProducto", "
 	(1, 1, 2),
 	(2, 5, 3),
 	(3, 2, 3),
-	(4, 2, 1);
+	(4, 2, 1),
+	(5, 7, 1);
 /*!40000 ALTER TABLE "JFernandezProductoSucursal" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezProveedor
@@ -489,10 +538,11 @@ CREATE TABLE IF NOT EXISTS "JFernandezProveedor" (
 -- Volcando datos para la tabla JFernandezEcommerce.JFernandezProveedor: -1 rows
 /*!40000 ALTER TABLE "JFernandezProveedor" DISABLE KEYS */;
 REPLACE INTO "JFernandezProveedor" ("IdProveedor", "NombreProveedor", "Telefono") VALUES
-	(1, 'Provedor 1', '1234567890'),
+	(1, 'gabriel', '5577884455'),
 	(2, 'Provedor 2', '1234123412'),
 	(3, 'LUCAS', '6664852147'),
-	(4, 'juanito', '1231234321');
+	(4, 'juanito', '1231234321'),
+	(5, 'Marco', '5577885522');
 /*!40000 ALTER TABLE "JFernandezProveedor" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezSucursal
@@ -508,7 +558,8 @@ REPLACE INTO "JFernandezSucursal" ("IdSucursal", "NombreS") VALUES
 	(1, 'sanborns'),
 	(2, 'Wallmart'),
 	(3, 'Aurrera'),
-	(4, 'Electra');
+	(4, 'Electra'),
+	(5, 'coopel');
 /*!40000 ALTER TABLE "JFernandezSucursal" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezVenta
@@ -529,8 +580,10 @@ CREATE TABLE IF NOT EXISTS "JFernandezVenta" (
 /*!40000 ALTER TABLE "JFernandezVenta" DISABLE KEYS */;
 REPLACE INTO "JFernandezVenta" ("IdVenta", "IdCliente", "Total", "IdMetodoPago", "Fecha") VALUES
 	(1, 1, 15.45, 2, '2020-12-20'),
-	(2, 3, 14.87, 1, '2020-12-20'),
-	(3, 3, 500.5, 1, '2020-12-29');
+	(5, 3, 23.3199996948242, 2, '2020-12-31'),
+	(6, 5, 24.3400001525879, 2, '2020-12-30'),
+	(7, 5, 2, 1, '2020-12-30'),
+	(8, 1, 18.5, 2, '2021-01-04');
 /*!40000 ALTER TABLE "JFernandezVenta" ENABLE KEYS */;
 
 -- Volcando estructura para tabla JFernandezEcommerce.JFernandezVentaProducto
@@ -540,21 +593,25 @@ CREATE TABLE IF NOT EXISTS "JFernandezVentaProducto" (
 	"IdProductoSucursal" INT NULL DEFAULT NULL,
 	"Cantidad" INT NULL DEFAULT NULL,
 	"IdProducto" INT NULL DEFAULT NULL,
+	FOREIGN KEY INDEX "FK_JFernandezVentaProducto_JFernandezVenta" ("IdVenta"),
 	FOREIGN KEY INDEX "FK_JFernandezVentaProducto_JFernandezProductoSucursal" ("IdProductoSucursal"),
-	PRIMARY KEY ("IdVentaProducto"),
-	FOREIGN KEY INDEX "FK_JFernandezVentaProducto_JFernandezVenta1" ("IdVenta"),
 	FOREIGN KEY INDEX "FK_JFernandezVentaProducto_JFernandezProductos" ("IdProducto"),
+	PRIMARY KEY ("IdVentaProducto"),
 	CONSTRAINT "FK_JFernandezVentaProducto_JFernandezProductos" FOREIGN KEY ("IdProducto") REFERENCES "JFernandezProductos" ("IdProducto") ON UPDATE NO_ACTION ON DELETE NO_ACTION,
 	CONSTRAINT "FK_JFernandezVentaProducto_JFernandezProductoSucursal" FOREIGN KEY ("IdProductoSucursal") REFERENCES "JFernandezProductoSucursal" ("IdProductoSucursal") ON UPDATE NO_ACTION ON DELETE NO_ACTION,
-	CONSTRAINT "FK_JFernandezVentaProducto_JFernandezVenta1" FOREIGN KEY ("IdVenta") REFERENCES "JFernandezVenta" ("IdVenta") ON UPDATE NO_ACTION ON DELETE NO_ACTION
+	CONSTRAINT "FK_JFernandezVentaProducto_JFernandezVenta" FOREIGN KEY ("IdVenta") REFERENCES "JFernandezVenta" ("IdVenta") ON UPDATE NO_ACTION ON DELETE NO_ACTION
 );
 
 -- Volcando datos para la tabla JFernandezEcommerce.JFernandezVentaProducto: -1 rows
 /*!40000 ALTER TABLE "JFernandezVentaProducto" DISABLE KEYS */;
 REPLACE INTO "JFernandezVentaProducto" ("IdVentaProducto", "IdVenta", "IdProductoSucursal", "Cantidad", "IdProducto") VALUES
-	(1, 1, 2, 2, 1),
-	(2, 2, 4, 21, 9),
-	(3, 1, 1, 13, 1);
+	(1, 5, 2, 2, 6),
+	(2, 7, 4, 21, 9),
+	(3, 6, 1, 13, 1),
+	(4, 8, 3, 55, 8),
+	(5, 5, 1, 666, 1),
+	(6, 5, 1, 2, 9),
+	(7, 5, 3, 777, 1);
 /*!40000 ALTER TABLE "JFernandezVentaProducto" ENABLE KEYS */;
 
 -- Volcando estructura para procedimiento JFernandezEcommerce.sp_alterdiagram

@@ -25,7 +25,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddArea";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreA", area.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", area.Nombre);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if(RowsAffected > 0)
                         {
@@ -87,7 +87,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateArea";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreA", area.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", area.Nombre);
                         cmd.Parameters.AddWithValue("@IdArea", area.IdArea);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
@@ -158,7 +158,7 @@ namespace BL
             {
                 using (SqlConnection context = new SqlConnection(DL_SQL_client.Conexion.GetConnectionString()))
                 {
-                    string query = "SELECT [IdArea], [NombreA] FROM JFernandezArea WHERE IdArea = " + IdArea;
+                    string query = "SELECT [IdArea], [Nombre] FROM JFernandezArea WHERE IdArea = " + IdArea;
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = context;

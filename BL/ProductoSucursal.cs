@@ -136,10 +136,12 @@ namespace BL
                                 productoSucursal.IdProductoSucursal = int.Parse(row[0].ToString());
                                 //productoSucursal.IdProducto = int.Parse(row[1].ToString());
                                 productoSucursal.Producto = new ML.Producto();
-                                productoSucursal.Producto.Nombre = row[1].ToString();
+                                productoSucursal.Producto.IdProducto = int.Parse(row[1].ToString());
+                                productoSucursal.Producto.Nombre = row[2].ToString();
                                 //productoSucursal.IdSucursal = int.Parse(row[2].ToString());
                                 productoSucursal.Sucursal = new ML.Sucursal();
-                                productoSucursal.Sucursal.Nombre = row[2].ToString();
+                                productoSucursal.Sucursal.IdSucursal = int.Parse(row[3].ToString());
+                                productoSucursal.Sucursal.Nombre = row[4].ToString();
                                 result.Objects.Add(productoSucursal);
                             }
                             result.Correct = true;

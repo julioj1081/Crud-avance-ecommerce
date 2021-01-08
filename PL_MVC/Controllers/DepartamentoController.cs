@@ -13,7 +13,7 @@ namespace PL_MVC.Controllers
         [HttpGet]
         public ActionResult GetAllDepartamento()
         {
-            ML.Result result = BL.Departamento.GetAllEF();
+            ML.Result result = BL.Departamento.GetAllDepartamento();
             ML.Departamento departamento = new ML.Departamento();
             departamento.Departamentos = result.Objects;
             return View(departamento);
@@ -35,7 +35,7 @@ namespace PL_MVC.Controllers
             }
             else//Update
             {
-                ML.Result result = BL.Departamento.GetByIdEF(IdDepartamento.Value);
+                ML.Result result = BL.Departamento.GetByDepartamento(IdDepartamento.Value);
                 if (result.Correct)
                 {
                     departamento.IdDepartamento = ((ML.Departamento)result.Object).IdDepartamento;
@@ -115,10 +115,10 @@ namespace PL_MVC.Controllers
 
 
         [HttpGet]
-        public ActionResult Delete (ML.Departamento departamento)
+        public ActionResult Delete (int departamento)
         {
-            departamento.IdDepartamento = Convert.ToInt32(departamento.IdDepartamento);
-            var result = BL.Departamento.DeleteEF(departamento);
+            //departamento.IdDepartamento = Convert.ToInt32(departamento.IdDepartamento);
+            var result = BL.Departamento.DeleteDepartamento(departamento);
             return RedirectToAction("GetAllDepartamento");
         }
 

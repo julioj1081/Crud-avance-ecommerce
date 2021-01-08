@@ -28,12 +28,12 @@ namespace PL_Consola
             producto.Image = "No disponible";
 
             //Se va a BL
-            //ML.Result result = BL.Producto.AddProducto(producto);
-            ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
-            var result = server.AddProducto(producto);
+            ML.Result result = BL.Producto.AddProducto(producto);
+            //ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
+            //var result = server.AddProducto(producto);
             if (result.Correct)
             {
-                Console.WriteLine("Producto insertado correctamente con WCF");
+                Console.WriteLine("Producto insertado correctamente");
             }
             else
             {
@@ -47,12 +47,12 @@ namespace PL_Consola
             Console.WriteLine("Ingresa el id del producto");
             producto.IdProducto = int.Parse(Console.ReadLine());
             //Se va a BL
-            //ML.Result result = BL.Producto.DeleteProducto(producto);
-            ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
-            var result = server.DeleteProducto(producto);
+            ML.Result result = BL.Producto.DeleteProducto(producto);
+            //ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
+            //var result = server.DeleteProducto(producto);
             if (result.Correct)
             {
-                Console.WriteLine("Producto eliminado correctamente con WCF");
+                Console.WriteLine("Producto eliminado correctamente");
             }
             else
             {
@@ -85,9 +85,9 @@ namespace PL_Consola
                 producto.Image = "No disponible";
 
                 //Se va a BL
-                //ML.Result res = BL.Producto.UpdateProducto(producto);
-                ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
-                var res = server.UpdateProducto(producto);
+                ML.Result res = BL.Producto.UpdateProducto(producto);
+                //ServiceReferenceProducto.ProductoClient server = new ServiceReferenceProducto.ProductoClient();
+                //var res = server.UpdateProducto(producto);
                 if (res.Correct)
                 {
                     Console.WriteLine("Producto modificado correctamente");

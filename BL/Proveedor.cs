@@ -22,7 +22,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddProveedor";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreProveedor", proveedor.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", proveedor.Nombre);
                         cmd.Parameters.AddWithValue("@Telefono", proveedor.Telefono);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
@@ -90,7 +90,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateProveedor";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreProveedor", proveedor.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", proveedor.Nombre);
                         cmd.Parameters.AddWithValue("@Telefono", proveedor.Telefono);
                         cmd.Parameters.AddWithValue("@IdProveedor", proveedor.IdProveedor);
                         int rows = cmd.ExecuteNonQuery();

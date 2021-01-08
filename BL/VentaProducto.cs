@@ -39,6 +39,7 @@ namespace BL
                                 //VentaProducto.IdVenta = int.Parse(row[1].ToString());
                                 VentaProducto.Venta = new ML.Venta();
                                 VentaProducto.Venta.IdVenta = int.Parse(row[1].ToString());
+                                
                                 //VentaProducto.IdProductoSucursal = int.Parse(row[2].ToString());
 
                                 VentaProducto.Sucursal = new ML.Sucursal();

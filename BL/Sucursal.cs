@@ -24,7 +24,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddSucursal";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreS", sucursal.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", sucursal.Nombre);
                         int RowsAffected = cmd.ExecuteNonQuery();
                         if (RowsAffected > 0)
                         {
@@ -88,7 +88,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateSucursal";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreS", sucursal.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", sucursal.Nombre);
                         cmd.Parameters.AddWithValue("@IdSucursal", sucursal.IdSucursal);
                         int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)

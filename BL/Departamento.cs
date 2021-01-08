@@ -28,7 +28,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "AddDepartamento";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreD", departamento.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", departamento.Nombre);
                         cmd.Parameters.AddWithValue("@IdArea", departamento.Area.IdArea);
                         int rows = cmd.ExecuteNonQuery();
                         if(rows > 0)
@@ -96,7 +96,7 @@ namespace BL
                         cmd.Connection.Open();
                         cmd.CommandText = "UpdateDepartamento";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NombreD", departamento.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre", departamento.Nombre);
                         cmd.Parameters.AddWithValue("@IdArea", departamento.Area.IdArea);
                         cmd.Parameters.AddWithValue("@IdDepartamento", departamento.IdDepartamento);
                         int rows = cmd.ExecuteNonQuery();
@@ -145,7 +145,8 @@ namespace BL
                                 departamento.Nombre = row[1].ToString();
                                 //departamento.IdArea = int.Parse(row[2].ToString());
                                 departamento.Area = new ML.Area();
-                                departamento.Area.Nombre = row[2].ToString();
+                                departamento.Area.IdArea = int.Parse(row[2].ToString());
+                                departamento.Area.Nombre = row[3].ToString();
 
                                 result.Objects.Add(departamento);
 
@@ -178,7 +179,7 @@ namespace BL
             {
                 using(SqlConnection context = new SqlConnection(DL_SQL_client.Conexion.GetConnectionString()))
                 {
-                    string query = "Select [IdDepartamento], [NombreD], [IdArea] from JFernandezDepartamento WHERE IdDepartamento=" + IdDepartamento;
+                    string query = "Select [IdDepartamento], [Nombre], [IdArea] from JFernandezDepartamento WHERE IdDepartamento=" + IdDepartamento;
                     using(SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = context;
@@ -228,148 +229,148 @@ namespace BL
 
 
         //Con ENTITY
-        public static ML.Result GetAllEF()
-        {
-            ML.Result result = new ML.Result();
-            try
-            {
-                using(EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
-                {
-                    var p = context.JFernandezDepartamento.ToList();
-                    result.Objects = new List<object>();
-                    if(p != null)
-                    {
-                        foreach(var item in p)
-                        {
-                            ML.Departamento depa = new ML.Departamento();
-                            depa.IdDepartamento = item.IdDepartamento;
-                            depa.Nombre = item.NombreD;
-                            //depa.IdArea = (int)item.IdArea;
-                            depa.Area = new ML.Area();
-                            depa.Area.Nombre = item.JFernandezArea.NombreA;
-                            result.Objects.Add(depa);
-                        }
-                        result.Correct = true;
-                    }
-                    else
-                    {
-                        result.Correct = false;
-                    }
-                }
+        //public static ML.Result GetAllEF()
+        //{
+        //    ML.Result result = new ML.Result();
+        //    try
+        //    {
+        //        using(EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+        //        {
+        //            var p = context.JFernandezDepartamento.ToList();
+        //            result.Objects = new List<object>();
+        //            if(p != null)
+        //            {
+        //                foreach(var item in p)
+        //                {
+        //                    ML.Departamento depa = new ML.Departamento();
+        //                    depa.IdDepartamento = item.IdDepartamento;
+        //                    depa.Nombre = item.NombreD;
+        //                    //depa.IdArea = (int)item.IdArea;
+        //                    depa.Area = new ML.Area();
+        //                    depa.Area.Nombre = item.JFernandezArea.NombreA;
+        //                    result.Objects.Add(depa);
+        //                }
+        //                result.Correct = true;
+        //            }
+        //            else
+        //            {
+        //                result.Correct = false;
+        //            }
+        //        }
 
-            }catch(Exception e)
-            {
-                result.Correct = false;
-                result.ErrorMessage = "Error desconocido" +e;
-            }
-            return result;
-        }
+        //    }catch(Exception e)
+        //    {
+        //        result.Correct = false;
+        //        result.ErrorMessage = "Error desconocido" +e;
+        //    }
+        //    return result;
+        //}
         
-        public static ML.Result AddEF(ML.Departamento departamento)
-        {
-            ML.Result result = new ML.Result();
-            try
-            {
-                using(EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
-                {
-                    var query = context.AddDepartamento(departamento.Nombre,(int) departamento.Area.IdArea);
-                    if(query >= 1)
-                    {
-                        result.Correct = true;
-                    }
-                    else
-                    {
-                        result.Correct = false;
-                    }
-                }
-            }catch(Exception e)
-            {
-                result.Correct = false;
-                result.ErrorMessage = "Error desconocido" + e;
-            }
-            return result;
-        }
+        //public static ML.Result AddEF(ML.Departamento departamento)
+        //{
+        //    ML.Result result = new ML.Result();
+        //    try
+        //    {
+        //        using(EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+        //        {
+        //            var query = context.AddDepartamento(departamento.Nombre,(int) departamento.Area.IdArea);
+        //            if(query >= 1)
+        //            {
+        //                result.Correct = true;
+        //            }
+        //            else
+        //            {
+        //                result.Correct = false;
+        //            }
+        //        }
+        //    }catch(Exception e)
+        //    {
+        //        result.Correct = false;
+        //        result.ErrorMessage = "Error desconocido" + e;
+        //    }
+        //    return result;
+        //}
     
-        public static ML.Result DeleteEF(ML.Departamento departamento)
-        {
-            ML.Result result = new ML.Result();
-            try
-            {
-                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities()) {
-                    var query = context.DeleteDepartamento(departamento.IdDepartamento);
-                    if(query >= 1)
-                    {
-                        result.Correct = true;
-                    }
-                    else
-                    {
-                        result.Correct = false;
-                    }
-                }
-            }catch(Exception e)
-            {
-                result.Correct = false;
-                result.ErrorMessage = "Error desconocido" + e;
-            }
-            return result;
-        }
+        //public static ML.Result DeleteEF(ML.Departamento departamento)
+        //{
+        //    ML.Result result = new ML.Result();
+        //    try
+        //    {
+        //        using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities()) {
+        //            var query = context.DeleteDepartamento(departamento.IdDepartamento);
+        //            if(query >= 1)
+        //            {
+        //                result.Correct = true;
+        //            }
+        //            else
+        //            {
+        //                result.Correct = false;
+        //            }
+        //        }
+        //    }catch(Exception e)
+        //    {
+        //        result.Correct = false;
+        //        result.ErrorMessage = "Error desconocido" + e;
+        //    }
+        //    return result;
+        //}
    
-        public static Result GetByIdEF(int IdDepartamento)
-        {
-            Result resultado = new Result();
-            try
-            {
-                using(EF.JFernandezEcommerceEntities context = new EF.JFernandezEcommerceEntities())
-                {
-                    var result = (from a in context.GetByIdEF_Departamento(IdDepartamento) select a).FirstOrDefault();
+        //public static Result GetByIdEF(int IdDepartamento)
+        //{
+        //    Result resultado = new Result();
+        //    try
+        //    {
+        //        using(EF.JFernandezEcommerceEntities context = new EF.JFernandezEcommerceEntities())
+        //        {
+        //            var result = (from a in context.GetByIdEF_Departamento(IdDepartamento) select a).FirstOrDefault();
 
-                    if (result != null)
-                    {
-                        ML.Departamento depa = new ML.Departamento();
-                        depa.IdDepartamento = result.IdDepartamento;
-                        depa.Nombre = result.NombreD;
-                        depa.Area = new ML.Area();
-                        depa.Area.IdArea = Convert.ToInt32(result.IdArea);
-                        resultado.Object = depa;
-                    }
-                    resultado.Correct = true;
-                }
-            }catch(Exception e)
-            {
-                resultado.Correct = false;
-                resultado.ErrorMessage = "Error desconocido" + e;
-            }
-            return resultado;
-        }
+        //            if (result != null)
+        //            {
+        //                ML.Departamento depa = new ML.Departamento();
+        //                depa.IdDepartamento = result.IdDepartamento;
+        //                depa.Nombre = result.NombreD;
+        //                depa.Area = new ML.Area();
+        //                depa.Area.IdArea = Convert.ToInt32(result.IdArea);
+        //                resultado.Object = depa;
+        //            }
+        //            resultado.Correct = true;
+        //        }
+        //    }catch(Exception e)
+        //    {
+        //        resultado.Correct = false;
+        //        resultado.ErrorMessage = "Error desconocido" + e;
+        //    }
+        //    return resultado;
+        //}
 
-        public static ML.Result UpdateEF(ML.Departamento departamento)
-        {
-            //produc.idProducto = idproducto;
-            ML.Result result = new ML.Result();
-            try
-            {
-                using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
-                {
-                    var query = context.UpdateDepartamento(departamento.Nombre, departamento.Area.IdArea, departamento.IdDepartamento);
-                    if (query >= 1)
-                    {
-                        result.Correct = true;
-                    }
-                    else
-                    {
-                        result.Correct = false;
-                        result.ErrorMessage = "Error desconocido";
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                result.Correct = false;
-                result.ErrorMessage = "Error desconocido" + e.Message;
+        //public static ML.Result UpdateEF(ML.Departamento departamento)
+        //{
+        //    //produc.idProducto = idproducto;
+        //    ML.Result result = new ML.Result();
+        //    try
+        //    {
+        //        using (EF.JFernandezEcommerceEntities context = new JFernandezEcommerceEntities())
+        //        {
+        //            var query = context.UpdateDepartamento(departamento.Nombre, departamento.Area.IdArea, departamento.IdDepartamento);
+        //            if (query >= 1)
+        //            {
+        //                result.Correct = true;
+        //            }
+        //            else
+        //            {
+        //                result.Correct = false;
+        //                result.ErrorMessage = "Error desconocido";
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        result.Correct = false;
+        //        result.ErrorMessage = "Error desconocido" + e.Message;
 
-            }
-            return result;
-        }
+        //    }
+        //    return result;
+        //}
 
 
 
