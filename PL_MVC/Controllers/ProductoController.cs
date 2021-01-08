@@ -16,6 +16,7 @@ namespace PL_MVC.Controllers
             ML.Result result = BL.Producto.GetAllEF();
             ML.Producto producto = new ML.Producto();
             producto.Productos = result.Objects;
+
             return View(producto);
         }
 
@@ -23,6 +24,22 @@ namespace PL_MVC.Controllers
         public ActionResult Form(int? IdProducto)//Add, Update
         {
             ML.Producto producto = new ML.Producto();
+            
+            //Areas Combobox
+            ML.Result resultAreas = BL.Area.GetAllArea();
+            producto.Area = new ML.Area();
+            producto.Area.Areas = resultAreas.Objects;
+
+            //Departamentos
+            ML.Result resultDepartamentos = BL.Departamento.GetAllDepartamento();
+            producto.Departamento = new ML.Departamento();
+            producto.Departamento.Departamentos = resultDepartamentos.Objects;
+
+            //Proveedor
+            ML.Result resultProveedor = BL.Proveedor.GetAllProveedor();
+            producto.Proveedor = new ML.Proveedor();
+            producto.Proveedor.Proveedores = resultProveedor.Objects;
+            
             if (IdProducto == null) //Add
             {
                 return View(producto);
@@ -37,10 +54,13 @@ namespace PL_MVC.Controllers
                     producto.Descripcion = ((ML.Producto)result.Object).Descripcion;
                     producto.Precio = ((ML.Producto)result.Object).Precio;
 
-                    producto.Departamento = new ML.Departamento();
+                    //producto.Area = new ML.Area();
+                    producto.Area.IdArea = int.Parse("0");
+
+                    //producto.Departamento = new ML.Departamento();
                     producto.Departamento.IdDepartamento = ((ML.Producto)result.Object).Departamento.IdDepartamento;
 
-                    producto.Proveedor = new ML.Proveedor();
+                    //producto.Proveedor = new ML.Proveedor();
                     producto.Proveedor.IdProveedor = ((ML.Producto)result.Object).Proveedor.IdProveedor;
                     //product.Image = ((ML.Producto)result.Object).Image;
                     return View(producto);
@@ -108,6 +128,9 @@ namespace PL_MVC.Controllers
             var result = BL.Producto.DeleteEF(producto);
             return RedirectToAction("GetAllProducto");
         }
+
+       
+
 
         ////trae plantilla con datos
         //[HttpGet]

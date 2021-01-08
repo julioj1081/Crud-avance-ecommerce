@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @using(Html.BeginForm("Form", "Departamento", FormMethod.Post))
+            @using (Html.BeginForm("Form", "Departamento", FormMethod.Post))
             {
                 <div class="form-horizontal">
                     <div class="form-group">
@@ -30,9 +30,11 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-3">
-                            @Html.LabelFor(model => model.Area.IdArea)
-                            @Html.TextBoxFor(model => model.Area.IdArea, new { @class="form-control"})
-                            @Html.ValidationMessageFor(model => model.Area.IdArea)
+                            @*@Html.LabelFor(model => model.Area.IdArea)
+                            @Html.TextBoxFor(model => model.Area.IdArea, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Area.IdArea)*@
+                            <label>Areas</label>
+                            @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Selecciona", new { @class="form-control"})
                         </div>
                     </div>
                     <div class="form-group">

@@ -14,14 +14,23 @@ namespace ML
         public decimal Precio { get; set; }
 
 
-        public ML.Departamento Departamento { get; set; }
-
-        public ML.Proveedor Proveedor { get; set; }
+       
 
         //public int IdProveedor { get; set; }
         //public string Proveedor { get; set; }
         public string Image { get; set; }
 
         public List<object> Productos { get; set; }
+
+
+        //extras combobox
+        public ML.Area Area { get; set; }
+
+        public ML.Departamento Departamento { get; set; }
+
+        public ML.Proveedor Proveedor { get; set; }
+
+
+
     }
 }

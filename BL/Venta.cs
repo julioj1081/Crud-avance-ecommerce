@@ -72,10 +72,10 @@ namespace BL
                         }
                     }
                 }
-            }catch(Exception e)
+            }catch(Exception ex)
             {
                 result.Correct = false; 
-                result.ErrorMessage = "Error este cliente tiene una venta de detalle";
+                result.ErrorMessage = "Error este cliente tiene una venta de detalle: "+ex;
             }
             return result;
         }

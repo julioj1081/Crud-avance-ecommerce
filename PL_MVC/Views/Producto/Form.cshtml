@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @using(Html.BeginForm("Form", "Producto", FormMethod.Post))
+            @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
             <div class="form-horizontal">
                 <div class="form-group">
@@ -45,15 +45,23 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
+                        <label>Area</label>
+                        @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Selecciona", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
                         @Html.LabelFor(model => model.Departamento.IdDepartamento)
-                        @Html.TextBoxFor(model => model.Departamento.IdDepartamento, new { @class = "form-control" })
+                        @*@Html.TextBoxFor(model => model.Departamento.IdDepartamento, new { @class = "form-control" })*@
+                        @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona", new { @class="form-control"})
                         @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
                         @Html.LabelFor(model => model.Proveedor.IdProveedor)
-                        @Html.TextBoxFor(model => model.Proveedor.IdProveedor, new { @class = "form-control" })
+                        @*@Html.TextBoxFor(model => model.Proveedor.IdProveedor, new { @class = "form-control" })*@
+                        @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Nombre"), "Selecciona", new { @class="form-control"})
                         @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
                     </div>
                 </div>
@@ -73,3 +81,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    function Dropdownlist() {
+        //alert("hola");
+        var $dropdown = $(".dropdown");
+        $.ajax({
+            url: "https://localhost:44387/api/Area",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                $.each(result.Objects, function (key, item) {
+                    $dropdown.append($("<option />").val(item.IdArea).text(item.Nombre));
+                    //console.log(item);
+                });
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>

@@ -23,7 +23,13 @@ namespace PL_MVC.Controllers
         public ActionResult Form (int? IdDepartamento)
         {
             ML.Departamento departamento = new ML.Departamento();
-            if(IdDepartamento == null)//Add
+
+            //areas
+            ML.Result resultAreas = BL.Area.GetAllArea();
+            departamento.Area = new ML.Area();
+            departamento.Area.Areas = resultAreas.Objects;
+
+            if (IdDepartamento == null)//Add
             {
                 return View(departamento);
             }
@@ -34,7 +40,7 @@ namespace PL_MVC.Controllers
                 {
                     departamento.IdDepartamento = ((ML.Departamento)result.Object).IdDepartamento;
                     departamento.Nombre = ((ML.Departamento)result.Object).Nombre;
-                    departamento.Area = new ML.Area();
+                    //departamento.Area = new ML.Area();
                     departamento.Area.IdArea = ((ML.Departamento)result.Object).Area.IdArea;
                     return View(departamento);
                 }
@@ -45,6 +51,7 @@ namespace PL_MVC.Controllers
                 }
             }
         }
+       
 
         [HttpPost] //Recibir datos del formulario
         public ActionResult Form(ML.Departamento departamento)
@@ -67,6 +74,27 @@ namespace PL_MVC.Controllers
             }
             return PartialView("validacion");
         }
+
+        //[HttpGet]
+        //public void GetAllArea()
+        //{
+        //    ML.Result result = BL.Area.GetAllArea();
+        //    ML.Area area = new ML.Area();
+        //    area.Areas = result.Objects;
+        //    List<SelectListItem> lista = new List<SelectListItem>();
+        //    using (var bd = new EF.JFernandezEcommerceEntities())
+        //    {
+        //        List<SelectListItem> listaAreas = (from item in bd.JFernandezArea
+        //                                           select new SelectListItem
+        //                                           {
+        //                                               Text = item.NombreA,
+        //                                               Value = item.IdArea.ToString()
+        //                                           }).ToList();
+        //        listaAreas.AddRange(lista);
+        //        listaAreas.Insert(0, new SelectListItem { Text = "--Seleccione--", Value = "" });
+        //        ViewBag.listaAreas = listaAreas;
+        //    }
+        //}
 
         //[HttpPost]
         //public ActionResult Registro(ML.Departamento departamento)
